@@ -1,8 +1,8 @@
 # Pip package
 import pandas as pd
 
-from datatypes import Card
-from random import randint
+from cards import Card
+import random
 
 
 class Deck:
@@ -21,44 +21,51 @@ class Deck:
         if filename is not None:
             self.cards = self._get_cards_from_csv(filename)
 
+    def __len__(self) -> int:
+        return len(self.cards)
+
     def add_card(self, card: Card) -> None:
         """Add a card to the deck."""
         self.cards.append(card)
 
     def shuffle(self) -> None:
         """Shuffle the deck."""
-        pass
+        random.shuffle(self.cards)
 
-    def draw(self, site: str | None = None) -> Card:
-        """
-        Args:
-            site (str): The site to draw from. If None, draw random card.
+    def draw_first_card(self) -> Card:
+        """Draw the first card from the deck. This means card will be removed from the deck."""
+        if len(self.cards) == 0:
+            raise ValueError("There are no cards in the deck.")
+        return self.cards.pop(0)
 
-        Returns:
-            Card: The card drawn. This means that the card will be remoed from the deck.
-        """
+    def pick_from_site(self, site: str | None = None) -> Card:
+        """When choosing a card, the card will be removed from the deck."""
 
         if site is None:
-            random_index = randint(0, len(self.cards) - 1)
+            random_index = random.randint(0, len(self.cards) - 1)
             return self.cards.pop(random_index)
         else:
             index = self._get_index_of_site(site)
-            if index is None:
-                raise ValueError(f"Site {site} is not in the deck.")
             return self.cards.pop(index)
 
-    def _get_index_of_site(self, site: str) -> int | None:
+    def _get_index_of_site(self, site: str) -> int:
         """Get the index of the site in the deck."""
         for i, e in enumerate(self.cards):
             if e.site == site:
                 return i
-        return None
+        raise ValueError(f"Site {site} is not in the deck.")
 
     def _get_cards_from_csv(self, filename: str) -> list[Card]:
-        # df = pd.read_csv(filename)
-        # card_data = df.to_dict(orient="records")
+        created_cards = []
 
-        return cards
+        df = pd.read_csv(filename)
+        card_data: list[dict] = df.to_dict(orient="records")
+
+        for element in card_data:
+            card = Card(**element)
+            created_cards.append(card)
+
+        return created_cards
 
     def _validate_arguments(
         self, cards: list[Card] | None, filename: str | None
@@ -70,9 +77,9 @@ class Deck:
             raise ValueError("Either cards or filename must be specified, not both.")
 
         if type(cards) != list or cards is not None:
-            raise TypeError(f"cards must be of list | None type, not {type(cards)}")
+            raise TypeError(f"cards must be of [list | None] type, not {type(cards)}")
 
         if type(filename) != str or filename is not None:
             raise TypeError(
-                f"filename must be of str | None type, not {type(filename)}"
+                f"filename must be of [str | None] type, not {type(filename)}"
             )

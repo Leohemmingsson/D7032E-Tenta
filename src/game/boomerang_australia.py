@@ -1,11 +1,14 @@
 from boomerang import Boomerang
-from player_types.Player import Player
+from player_types.player import Player
 
 
 class BoomerangAustralia(Boomerang):
-    def __init__(self, players: list[Player]):
-        self.cards_file = "src/cards/boomerang_australia.csv"
-        super().__init__(players)
+    def server_run(self, players: list[Player]):
+        super().init_server(players)
 
     def _get_initialized_deck(self):
         pass
+
+    @property
+    def _cards_file(self):
+        return "src/cards/boomerang_australia.csv"
