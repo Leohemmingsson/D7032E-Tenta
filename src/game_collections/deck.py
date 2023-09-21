@@ -11,9 +11,7 @@ class Deck:
     Can be initialized with a list of cards or a filename, only supports csv for now.
     """
 
-    def __init__(
-        self, cards: list[Card] | None = None, filename: str | None = None
-    ) -> None:
+    def __init__(self, cards: list[Card] | None = None, filename: str | None = None) -> None:
         self._validate_arguments(cards, filename)
 
         if cards is not None:
@@ -67,9 +65,7 @@ class Deck:
 
         return created_cards
 
-    def _validate_arguments(
-        self, cards: list[Card] | None, filename: str | None
-    ) -> None:
+    def _validate_arguments(self, cards: list[Card] | None, filename: str | None) -> None:
         if cards is None and filename is None:
             raise ValueError("Either cards or filename must be specified.")
 
@@ -80,6 +76,4 @@ class Deck:
             raise TypeError(f"cards must be of [list | None] type, not {type(cards)}")
 
         if type(filename) != str or filename is not None:
-            raise TypeError(
-                f"filename must be of [str | None] type, not {type(filename)}"
-            )
+            raise TypeError(f"filename must be of [str | None] type, not {type(filename)}")

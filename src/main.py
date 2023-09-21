@@ -1,7 +1,7 @@
 from connection import Client, Server, broadcast_message_to
 
 
-def main():
+def main() -> None:
     print("[0] Create a new game\n[1] Join an existing game")
     choice = ""
     while choice != "0" and choice != "1":
@@ -35,7 +35,7 @@ def _initialize_server(port: int | None) -> None:
             print(f"{x}")
 
 
-def _join_game(port: int | None):
+def _join_game(port: int | None) -> None:
     client = Client(port)
     try:
         client.run_client()
