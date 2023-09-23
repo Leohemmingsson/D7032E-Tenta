@@ -1,6 +1,6 @@
 import asyncio
 import socket
-from .client_connection_info import ClientConnectionInfo
+from data_structures import ClientConnectionInfo
 from .utils import get_full_message, send_message_to
 
 
@@ -13,21 +13,18 @@ class Server:
         self.greeting_message = "Connected to the server!"
         self.s: socket.socket
 
-    def start_server(self, number_of_clients: int) -> list[ClientConnectionInfo]:
+    def start_server(self, number_of_clients: int) -> list[ClientConnectionInfo] | None:
         """
         Starts a tcp server on given port, default port=1234
         """
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        s.bind((socket.gethostname(), self.PORT))
-        s.listen(5)
-        self.s = s
-        print(f"Server is listening on port {self.PORT}...")
+        if number_of_clients < 1:
+            return None
 
-        client_info = self._get_all_clients_connection_info(s, number_of_clients)
-        print("All clients connected!")
-
-        return client_info
+        try:
+            connection_info = self._connect_to_socket(number_of_clients)
+            return connection_info
+        except OSError:
+            print("Port already in use. Try again.")
 
     def get_answers_from_clients(self, client_info: list[ClientConnectionInfo]) -> list[tuple]:
         """
@@ -42,6 +39,17 @@ class Server:
     async def _listen_to_client(self, s_client: socket.socket) -> str:
         message = get_full_message(s_client, self.HEADERSIZE)
         return message
+
+    def _connect_to_socket(self, number_of_clients):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((socket.gethostname(), self.PORT))
+        s.listen(5)
+        self.s = s
+        print(f"Server is listening on port {self.PORT}...")
+
+        client_info = self._get_all_clients_connection_info(s, number_of_clients)
+        print("All clients connected!")
+        return client_info
 
     def _get_all_clients_connection_info(self, s: socket.socket, number_of_clients: int) -> list[ClientConnectionInfo]:
         print(f"Waiting for {number_of_clients} clients to connect...")
@@ -64,14 +72,3 @@ class Server:
 
     def close_server(self) -> None:
         self.s.close()
-
-
-if __name__ == "__main__":
-    server = Server()
-    all_clients = server.start_server(2)
-    for client in all_clients:
-        send_message_to(client.socket_connection, "reply")
-    x = server.get_answers_from_clients(all_clients)
-    print(f"{x}")
-
-    input()

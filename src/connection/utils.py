@@ -1,5 +1,5 @@
 import socket
-from .client_connection_info import ClientConnectionInfo
+from data_structures import ClientConnectionInfo
 
 
 def get_full_message(s, HEADERSIZE: int | None = None) -> str:
@@ -26,7 +26,8 @@ def get_full_message(s, HEADERSIZE: int | None = None) -> str:
 
 def broadcast_message_to(all_clients_connection_info: list[ClientConnectionInfo], message: str) -> None:
     for client in all_clients_connection_info:
-        send_message_to(client.socket_connection, message)
+        if client.socket_connection is not None:
+            send_message_to(client.socket_connection, message)
 
 
 def send_message_to(s: socket.socket, message: str) -> None:

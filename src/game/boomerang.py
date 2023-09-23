@@ -1,34 +1,12 @@
-# Std lib
-from abc import ABC, abstractmethod
-
 # Own modules
 from player_types.player import Player
 from game_collections import Deck
 
 
-class Boomerang(ABC):
-    """
-    Abstract class for Boomerang games
-    """
+class Boomerang:
+    def __init__(self, players: list[Player], deck: Deck) -> None:
+        self.players = players
+        self.deck = deck
 
-    @abstractmethod
-    def server_run(self):
-        pass
-
-    @abstractmethod
-    def client_run():
-        pass
-
-    @property
-    @abstractmethod
-    def _cards_file(self) -> str:
-        pass
-
-    def init_server(self, players: list[Player]):
-        """
-        Initializes the players and states of the game on the server side.
-        """
-        self.deck = self._get_initialized_deck()
-
-    def _get_initialized_deck(self) -> Deck:
-        return Deck(filename=self._cards_file)
+    def start_game(self) -> None:
+        print("Starting game")

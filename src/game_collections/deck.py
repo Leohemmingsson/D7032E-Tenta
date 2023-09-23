@@ -1,7 +1,7 @@
 # Pip package
 import pandas as pd
 
-from cards import Card
+from data_structures import Card
 import random
 
 
@@ -12,7 +12,8 @@ class Deck:
     """
 
     def __init__(self, cards: list[Card] | None = None, filename: str | None = None) -> None:
-        self._validate_arguments(cards, filename)
+        print(f"{cards=}, {filename=}")
+        self._validate_arguments(cards=cards, filename=filename)
 
         if cards is not None:
             self.cards = cards
@@ -72,8 +73,8 @@ class Deck:
         if cards is not None and filename is not None:
             raise ValueError("Either cards or filename must be specified, not both.")
 
-        if type(cards) != list or cards is not None:
+        if type(cards) != list and cards is not None:
             raise TypeError(f"cards must be of [list | None] type, not {type(cards)}")
 
-        if type(filename) != str or filename is not None:
+        if type(filename) != str and filename is not None:
             raise TypeError(f"filename must be of [str | None] type, not {type(filename)}")

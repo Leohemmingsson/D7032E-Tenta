@@ -1,58 +1,43 @@
-from connection import Client, Server, broadcast_message_to
+from game import Boomerang
+from connection import Client, Server
+from game_collections import Deck
+from initialize_game import (
+    get_server_settings_from_user,
+    is_server_from_user,
+    get_client_port_from_user,
+    get_game_folder_name_from_user,
+    create_players,
+    get_game_types,
+)
 
 
 def main() -> None:
-    print("[0] Create a new game\n[1] Join an existing game")
-    choice = ""
-    while choice != "0" and choice != "1":
-        choice = input("Enter your choice: ")
-        match choice:
-            case "0":
-                port = _get_game_port_number_from_user()
-                print("Creating a new game on port {port}...")
-                _initialize_server(port)
-            case "1":
-                port = _get_game_port_number_from_user()
-                _join_game(port)
+    """
+    Setups the game, starting gameloop and connecting all players
+    """
 
+    if is_server_from_user():
+        # Get all user input
+        server_settings = get_server_settings_from_user()
+        all_game_types = get_game_types()
+        game_folder_name = "./src/data/" + get_game_folder_name_from_user(all_game_types)
 
-def _initialize_server(port: int | None) -> None:
-    server = Server(port)
-    try:
-        all_clients = server.start_server(2)
-    except OSError:
-        print("Port already in use. Try again.")
-        return
+        # Start server
+        server = Server(server_settings["port"])
+        clients_connection_info = server.start_server(server_settings["client_count"])
 
-    while True:
-        user_message = input()
-        if "exit" in user_message:
-            server.close_server()
-            exit()
-        broadcast_message_to(all_clients, user_message)
-        if "reply" in user_message:
-            x = server.get_answers_from_clients(all_clients)
-            print(f"{x}")
+        # create objects
+        all_players = create_players(clients_connection_info, server_settings["bot_count"])
+        deck_filename = game_folder_name + "/cards.csv"
+        deck = Deck(filename=deck_filename)
+        game = Boomerang(all_players, deck)
 
+        game.start_game()
 
-def _join_game(port: int | None) -> None:
-    client = Client(port)
-    try:
+    else:
+        port = get_client_port_from_user()
+        client = Client(port)
         client.run_client()
-    except ConnectionRefusedError:
-        print(f"Connection refused. Make sure the server is running on port {port}")
-
-
-def _get_game_port_number_from_user() -> int | None:
-    port: int = 0
-    while port == 0:
-        user_input = input("Enter the port number (Empty for default): ")
-        try:
-            port = int(user_input)
-        except ValueError:
-            if user_input == "":
-                return None
-    return port
 
 
 if __name__ == "__main__":
