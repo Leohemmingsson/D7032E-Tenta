@@ -12,7 +12,6 @@ class Deck:
     """
 
     def __init__(self, cards: list[Card] | None = None, filename: str | None = None) -> None:
-        print(f"{cards=}, {filename=}")
         self._validate_arguments(cards=cards, filename=filename)
 
         if cards is not None:

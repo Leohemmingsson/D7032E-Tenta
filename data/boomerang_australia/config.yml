@@ -1,0 +1,15 @@
+about:
+  extension_name = Boomerang Australia
+  is_working = True
+
+naming:
+  animals: animals
+  collections: collections
+  activities: activities
+
+scoring:
+  general_score_rules:
+    - throw_and_catch
+    - first_to_get_region
+    
+

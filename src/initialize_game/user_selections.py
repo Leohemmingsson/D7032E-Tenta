@@ -3,7 +3,7 @@ All initial user selections are handled here.
 """
 
 
-def is_server_from_user() -> bool:
+def is_server() -> bool:
     """
     Starting menu for game, through termnial input.
     """
