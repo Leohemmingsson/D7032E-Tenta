@@ -1,6 +1,6 @@
 from .player import Player
 
 
-class Bot(Player):
+class ClientPlayer(Player):
     def send_message(self, message: str) -> None:
         pass
