@@ -18,6 +18,8 @@ class Deck:
             self.cards = cards
         if filename is not None:
             self.cards = self._get_cards_from_csv(filename)
+        if cards is None and filename is None:
+            self.cards = []
 
     def __len__(self) -> int:
         return len(self.cards)
@@ -66,9 +68,6 @@ class Deck:
         return created_cards
 
     def _validate_arguments(self, cards: list[Card] | None, filename: str | None) -> None:
-        if cards is None and filename is None:
-            raise ValueError("Either cards or filename must be specified.")
-
         if cards is not None and filename is not None:
             raise ValueError("Either cards or filename must be specified, not both.")
 

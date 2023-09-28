@@ -11,7 +11,7 @@ def main() -> None:
     if is_server():
         context = ContextLoader()
 
-        game = Boomerang(context.players, context.deck)
+        game = Boomerang(context.all_players, context.deck)
 
         game.start_game()
 

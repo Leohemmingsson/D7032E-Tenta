@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 import socket
 
-from data_structures import ClientConnectionInfo
+from data_structures import ClientConnectionInfo, Card
+from game_collections import Deck
 
 
 class Player(ABC):
     def __init__(self) -> None:
         self._score = 0
+        self.hand = Deck()
 
     @abstractmethod
     def send_message(self, message: str) -> None:
@@ -35,10 +37,14 @@ class Player(ABC):
     def add_score(self, value: int) -> None:
         self._score += value
 
+    def add_card(self, card: Card) -> None:
+        self.hand.add_card(card)
+
     @classmethod
     def from_client_connection_info(cls, connection_info: ClientConnectionInfo) -> "Player":
         c = cls()
         c.id = connection_info.id
+        c.socket_obj = connection_info.socket_connection
         return c
 
     @classmethod

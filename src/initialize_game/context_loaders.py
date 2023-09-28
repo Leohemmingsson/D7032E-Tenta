@@ -1,5 +1,4 @@
-from game_collections import Deck
-from player_types import Player
+from game_collections import Deck, MultiplePlayers
 from connection import Server
 from .create_players import create_players
 from .user_selections import get_server_settings_from_user, get_game_folder_name_from_user
@@ -32,12 +31,13 @@ class ContextLoader:
         return self._server_settings["bot_count"]
 
     @property
-    def players(self) -> list[Player]:
+    def all_players(self) -> MultiplePlayers:
         """
         Starts the server listens for clients and creates players.
         """
         clients_connection_info = self._server.start_server(self.client_count)
-        all_players = create_players(clients_connection_info, self.bot_count)
+        list_of_players = create_players(clients_connection_info, self.bot_count)
+        all_players = MultiplePlayers(list_of_players)
 
         return all_players
 
