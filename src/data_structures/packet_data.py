@@ -5,6 +5,7 @@ class PacketData:
     def __init__(self, path) -> None:
         self._deck_filename = path + "/cards.csv"
         self.load_data_from_config(path + "/config.yml")
+        self._path = path
 
     def __repr__(self) -> str:
         return self._name
@@ -20,6 +21,10 @@ class PacketData:
     @property
     def class_name(self) -> str:
         return self._class_name
+
+    @property
+    def path(self) -> str:
+        return self._path
 
     def load_data_from_config(self, path: str) -> None:
         with open(path, "r") as file:

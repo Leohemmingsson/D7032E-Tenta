@@ -1,4 +1,4 @@
-from .boomerang import Boomerang
+from game import Boomerang
 
 
 class BoomerangAustralia(Boomerang):

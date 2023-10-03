@@ -1,9 +1,9 @@
-from player_types import Player
+import player_types
 from .deck import Deck
 
 
 class MultiplePlayers:
-    def __init__(self, players: list[Player]) -> None:
+    def __init__(self, players: list[player_types.Player]) -> None:
         self.players = players
 
     def broadcast(self, message: str) -> None:
