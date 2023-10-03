@@ -1,6 +1,7 @@
 """
 All initial user selections are handled here.
 """
+from data_structures import PacketData
 
 
 def is_server() -> bool:
@@ -47,7 +48,7 @@ def get_client_port_from_user() -> int | None:
     return _get_game_port_number_from_user()
 
 
-def get_game_folder_name_from_user(alternatives: list) -> str:
+def get_packet_from_user(alternatives: list) -> PacketData:
     """
     Asks the user what game to launch. Ex boomerang australia or boomerang america
 
@@ -55,12 +56,20 @@ def get_game_folder_name_from_user(alternatives: list) -> str:
         path: str
     """
     print("Choose one of the following:")
-    for index, alternative in enumerate(alternatives):
-        print(f"[{index}] {alternative}")
+    for index, one_alternative in enumerate(alternatives):
+        active_info = ""
+        if not one_alternative.is_active:
+            active_info = "(Not working atm)"
+
+        print(f"[{index}] {one_alternative} {active_info}")
 
     index = -1
     while index not in range(len(alternatives)):
         index = _get_int_error_handled("Enter your choice: ")
+
+        if not alternatives[index].is_active:
+            print("Invalid choice")
+            index = -1
 
     return alternatives[index]
 

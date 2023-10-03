@@ -1,4 +1,4 @@
-from game import Boomerang
+from game import create_game_from_context
 from connection import Client
 from initialize_game import (
     ContextLoader,
@@ -11,7 +11,7 @@ def main() -> None:
     if is_server():
         context = ContextLoader()
 
-        game = Boomerang(context.all_players, context.deck)
+        game = create_game_from_context(context)
 
         game.start_game()
 

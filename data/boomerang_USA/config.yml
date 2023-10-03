@@ -1,7 +1,7 @@
 about:
-  name: Boomerang Australia
-  class_name: BoomerangAustralia
-  is_active: True
+  name: Boomerang USA
+  class_name: BoomerangUSA
+  is_active: False
 
 naming:
   animals: animals
