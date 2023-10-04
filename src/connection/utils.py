@@ -5,11 +5,16 @@ from data_structures import ClientConnectionInfo
 def get_full_message(s, HEADERSIZE: int | None = None) -> str:
     if HEADERSIZE is None:
         HEADERSIZE = 10
+
     full_message = ""
     new_message = True
     message_length: int = 0
+    to_receive = 10
+    current_length = 0
     while True:
-        message = s.recv(16)
+        if not new_message and (message_length - current_length) < to_receive:
+            to_receive = message_length - current_length
+        message = s.recv(to_receive)
         if len(message) == 0:
             print("Connection closed")
             exit()
@@ -20,7 +25,8 @@ def get_full_message(s, HEADERSIZE: int | None = None) -> str:
 
         full_message += message.decode("utf-8")
 
-        if len(full_message) - HEADERSIZE == message_length:
+        current_length = len(full_message) - HEADERSIZE
+        if current_length == message_length:
             return full_message[HEADERSIZE:]
 
 

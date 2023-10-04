@@ -1,3 +1,7 @@
 {
-    "code-runner.customCommand": "python src/main.py"
+    "code-runner.customCommand": "python src/main.py",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
 }

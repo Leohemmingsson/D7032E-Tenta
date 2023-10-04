@@ -36,6 +36,14 @@ class MultiplePlayers:
             all_cards.add_deck(player.get_all_cards())
         return all_cards
 
+    def show_each_player_their_cards(self) -> None:
+        for player in self.players:
+            player.show_cards_in_hand()
+
+    def choose_cards(self) -> None:
+        for player in self.players:
+            player.choose_card()
+
     def show_all_player_stats(self):
         for one_player in self.players:
             print(one_player.id)

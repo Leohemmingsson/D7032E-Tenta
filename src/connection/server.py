@@ -24,7 +24,7 @@ class Server:
             connection_info = self._connect_to_socket(number_of_clients)
             return connection_info
         except OSError:
-            print("Port already in use. Try again.")
+            raise OSError("Port already in use. Try again.")
 
     def get_answers_from_clients(self, client_info: list[ClientConnectionInfo]) -> list[tuple]:
         """

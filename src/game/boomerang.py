@@ -27,15 +27,12 @@ class Boomerang:
 
     def _start_rount(self) -> None:
         self.players.deal_cards(self.deck, 7)
-        self.players.show_all_player_stats()
-        self._throw_card()
-        ...
-
-    def _throw_card(self) -> None:
-        self.players.broadcast("")
+        for _ in range(7):
+            self.players.show_each_player_their_cards()
+            self.players.choose_cards()
 
     def _count_score(self) -> None:
-        raise NotImplementedError
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def _reset_round(self) -> None:
         cards_from_players = self.players.get_all_cards()

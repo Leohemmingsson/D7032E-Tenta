@@ -1,19 +1,23 @@
-from abc import ABC, abstractmethod
 import socket
 
 from data_structures import ClientConnectionInfo, Card
 from game_collections import Deck
 
 
-class Player(ABC):
+class Player:
     def __init__(self) -> None:
         self._score = 0
         self.hand = Deck()
         self._chosen_card = Deck()
 
-    @abstractmethod
     def send_message(self, message: str) -> None:
-        pass
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
+    def show_cards_in_hand(self) -> None:
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
+    def choose_card(self) -> None:
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     @property
     def id(self) -> int:
@@ -60,11 +64,15 @@ class Player(ABC):
     def add_card_to_hand(self, card: Card) -> None:
         self.hand.add_card(card)
 
-    def choose_card(self, site: str) -> None:
+    def _choose_card_from_site(self, site: str) -> None:
         """
         Takes chosen card from hand and places in chosen cards.
         """
         card = self.hand.pick_from_site(site)
+        self._chosen_card.add_card(card)
+
+    def _choose_first_card(self) -> None:
+        card = self.hand.draw_first_card()
         self._chosen_card.add_card(card)
 
     def get_all_cards(self) -> Deck:
