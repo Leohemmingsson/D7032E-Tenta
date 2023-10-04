@@ -19,8 +19,19 @@ class Boomerang:
         """
 
         self.players.broadcast("Starting game")
-        self.count_score()
+        for _ in range(4):
+            self._start_rount()
+            self._count_score()
         input()
 
-    def count_score(self) -> None:
+    def _start_rount(self) -> None:
+        self.players.deal_cards(self.deck, 7)
+        self.players.show_all_player_stats()
+        self._throw_card()
+        ...
+
+    def _throw_card(self) -> None:
+        self.players.broadcast("")
+
+    def _count_score(self) -> None:
         print("default")

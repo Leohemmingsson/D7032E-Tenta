@@ -9,6 +9,7 @@ class Player(ABC):
     def __init__(self) -> None:
         self._score = 0
         self.hand = Deck()
+        self._chosen_card = Deck()
 
     @abstractmethod
     def send_message(self, message: str) -> None:
@@ -33,6 +34,14 @@ class Player(ABC):
     @property
     def score(self) -> int:
         return self._score
+
+    @property
+    def cards_in_hand(self) -> Deck:
+        return self.hand
+
+    @property
+    def cards_chosen(self) -> Deck:
+        return self._chosen_card
 
     def add_score(self, value: int) -> None:
         self._score += value

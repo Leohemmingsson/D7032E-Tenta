@@ -1,9 +1,9 @@
 import game_collections
 from connection import Server
 from .create_players import create_players
-from .user_selections import get_server_settings_from_user, get_packet_from_user
+from .user_selections import get_server_settings_from_user, get_package_from_user
 from .read_file_structure import get_dir_in_path
-from data_structures import PacketData
+from data_structures import PackageData
 
 
 class ContextLoader:
@@ -15,9 +15,9 @@ class ContextLoader:
     def __init__(self):
         self._data_folder_name = "./src/data/"
         self._server_settings = get_server_settings_from_user()
-        all_packet_paths = get_dir_in_path(self._data_folder_name)
-        all_packet_types = [PacketData(self._data_folder_name + path) for path in all_packet_paths]
-        self.packet = get_packet_from_user(all_packet_types)
+        all_package_paths = get_dir_in_path(self._data_folder_name)
+        all_package_types = [PackageData(self._data_folder_name + path) for path in all_package_paths]
+        self._package = get_package_from_user(all_package_types)
         self._server = Server(self.port)
 
     @property
@@ -34,11 +34,11 @@ class ContextLoader:
 
     @property
     def class_name(self) -> str:
-        return self.packet.class_name
+        return self._package.class_name
 
     @property
     def packet_path(self) -> str:
-        return self.packet.path
+        return self._package.path
 
     @property
     def all_players(self) -> game_collections.MultiplePlayers:
@@ -53,6 +53,6 @@ class ContextLoader:
 
     @property
     def deck(self) -> game_collections.Deck:
-        deck = game_collections.Deck(filename=self.packet.deck_path)
+        deck = game_collections.Deck(filename=self._package.deck_path)
         deck.shuffle()
         return deck

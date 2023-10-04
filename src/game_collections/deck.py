@@ -15,42 +15,64 @@ class Deck:
         self._validate_arguments(cards=cards, filename=filename)
 
         if cards is not None:
-            self.cards = cards
+            self._cards = cards
         if filename is not None:
-            self.cards = self._get_cards_from_csv(filename)
+            self._cards = self._get_cards_from_csv(filename)
         if cards is None and filename is None:
-            self.cards = []
+            self._cards = []
 
     def __len__(self) -> int:
-        return len(self.cards)
+        return len(self._cards)
+
+    def __repr__(self) -> str:
+        col_len = 35
+        col_len_after_field = 25
+        repr_string = (
+            f"{'Site [letter] (nr)':<{col_len_after_field}}"
+            + "".join(
+                [
+                    f"{str(card.name) + ' [' + str(card.site) + ']' + ' (' + str(card.card_number) + ')':<{col_len}}"
+                    for card in self._cards
+                ]
+            )
+            + "\n"
+        )
+
+        for field in ["region", "collection", "animal", "activity"]:
+            repr_string += (
+                f"{field.capitalize():<{col_len_after_field}}"
+                + "".join([f"{str(getattr(card, field)):<{col_len}}" for card in self._cards])
+                + "\n"
+            )
+        return repr_string
 
     def add_card(self, card: Card) -> None:
         """Add a card to the deck."""
-        self.cards.append(card)
+        self._cards.append(card)
 
     def shuffle(self) -> None:
         """Shuffle the deck."""
-        random.shuffle(self.cards)
+        random.shuffle(self._cards)
 
     def draw_first_card(self) -> Card:
         """Draw the first card from the deck. This means card will be removed from the deck."""
-        if len(self.cards) == 0:
+        if len(self._cards) == 0:
             raise ValueError("There are no cards in the deck.")
-        return self.cards.pop(0)
+        return self._cards.pop(0)
 
     def pick_from_site(self, site: str | None = None) -> Card:
         """When choosing a card, the card will be removed from the deck."""
 
         if site is None:
-            random_index = random.randint(0, len(self.cards) - 1)
-            return self.cards.pop(random_index)
+            random_index = random.randint(0, len(self._cards) - 1)
+            return self._cards.pop(random_index)
         else:
             index = self._get_index_of_site(site)
-            return self.cards.pop(index)
+            return self._cards.pop(index)
 
     def _get_index_of_site(self, site: str) -> int:
         """Get the index of the site in the deck."""
-        for i, e in enumerate(self.cards):
+        for i, e in enumerate(self._cards):
             if e.site == site:
                 return i
         raise ValueError(f"Site {site} is not in the deck.")

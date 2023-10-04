@@ -3,10 +3,17 @@ from .deck import Deck
 
 
 class MultiplePlayers:
+    """
+    This will handle everything that every player should do at the same time.
+    """
+
     def __init__(self, players: list[player_types.Player]) -> None:
         self.players = players
 
     def broadcast(self, message: str) -> None:
+        """
+        Sends the same message to all players.
+        """
         for player in self.players:
             player.send_message(message)
 
@@ -17,3 +24,13 @@ class MultiplePlayers:
         for _ in range(number_of_cards_each):
             for player in self.players:
                 player.add_card(deck.draw_first_card())
+
+    def show_all_player_stats(self):
+        for one_player in self.players:
+            print(one_player.id)
+            print(one_player.score)
+            print("Cards in hand:")
+            print(one_player.cards_in_hand)
+            print("Cards chosen:")
+            print(one_player.cards_chosen)
+            print("------")

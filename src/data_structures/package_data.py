@@ -1,7 +1,7 @@
 import yaml
 
 
-class PacketData:
+class PackageData:
     def __init__(self, path) -> None:
         self._deck_filename = path + "/cards.csv"
         self.load_data_from_config(path + "/config.yml")

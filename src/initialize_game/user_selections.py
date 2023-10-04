@@ -1,7 +1,7 @@
 """
 All initial user selections are handled here.
 """
-from data_structures import PacketData
+from data_structures import PackageData
 
 
 def is_server() -> bool:
@@ -48,7 +48,7 @@ def get_client_port_from_user() -> int | None:
     return _get_game_port_number_from_user()
 
 
-def get_packet_from_user(alternatives: list) -> PacketData:
+def get_package_from_user(alternatives: list) -> PackageData:
     """
     Asks the user what game to launch. Ex boomerang australia or boomerang america
 
