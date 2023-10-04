@@ -1,3 +1,4 @@
+import asyncio
 import player_types
 from .deck import Deck
 
@@ -40,9 +41,14 @@ class MultiplePlayers:
         for player in self.players:
             player.show_cards_in_hand()
 
-    def choose_cards(self) -> None:
+    async def choose_cards(self) -> None:
+        loop = asyncio.get_event_loop()
+        tasks = []
+
         for player in self.players:
-            player.choose_card()
+            tasks.append(loop.create_task(player.choose_card()))
+        loop.run_until_complete(asyncio.wait(tasks))
+        loop.close()
 
     def show_all_player_stats(self):
         for one_player in self.players:

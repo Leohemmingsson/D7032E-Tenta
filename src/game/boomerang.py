@@ -1,5 +1,6 @@
 # std
 from typing import final
+import asyncio
 
 # Own modules
 from game_collections import Deck, MultiplePlayers
@@ -29,7 +30,7 @@ class Boomerang:
         self.players.deal_cards(self.deck, 7)
         for _ in range(7):
             self.players.show_each_player_their_cards()
-            self.players.choose_cards()
+            asyncio.run(self.players.choose_cards())
 
     def _count_score(self) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
