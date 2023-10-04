@@ -19,7 +19,8 @@ class Boomerang:
         """
 
         self.players.broadcast("Starting game")
+        self.count_score()
         input()
 
     def count_score(self) -> None:
-        ...
+        print("default")
