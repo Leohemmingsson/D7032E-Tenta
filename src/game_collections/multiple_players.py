@@ -23,7 +23,18 @@ class MultiplePlayers:
         """
         for _ in range(number_of_cards_each):
             for player in self.players:
-                player.add_card(deck.draw_first_card())
+                player.add_card_to_hand(deck.draw_first_card())
+
+    def get_all_cards(self) -> Deck:
+        """
+        Returns all cards that all players have in their hands.
+        Observer the cards are not shuffled.
+        No player will have any cards left in their hand after this.
+        """
+        all_cards = Deck()
+        for player in self.players:
+            all_cards.add_deck(player.get_all_cards())
+        return all_cards
 
     def show_all_player_stats(self):
         for one_player in self.players:
@@ -32,5 +43,5 @@ class MultiplePlayers:
             print("Cards in hand:")
             print(one_player.cards_in_hand)
             print("Cards chosen:")
-            print(one_player.cards_chosen)
+            print(one_player.all_chosen_cards)
             print("------")

@@ -22,6 +22,7 @@ class Boomerang:
         for _ in range(4):
             self._start_rount()
             self._count_score()
+            self._reset_round()
         input()
 
     def _start_rount(self) -> None:
@@ -34,4 +35,9 @@ class Boomerang:
         self.players.broadcast("")
 
     def _count_score(self) -> None:
-        print("default")
+        raise NotImplementedError
+
+    def _reset_round(self) -> None:
+        cards_from_players = self.players.get_all_cards()
+        cards_from_players.shuffle()
+        self.deck.add_deck(cards_from_players)

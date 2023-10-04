@@ -3,6 +3,7 @@ import pandas as pd
 
 from data_structures import Card
 import random
+from collections.abc import Iterator
 
 
 class Deck:
@@ -46,9 +47,20 @@ class Deck:
             )
         return repr_string
 
+    def __str__(self) -> str:
+        return self.__repr__()
+
+    def __iter__(self) -> Iterator[Card]:
+        for card in self._cards:
+            yield card
+
     def add_card(self, card: Card) -> None:
         """Add a card to the deck."""
         self._cards.append(card)
+
+    def add_deck(self, deck: "Deck") -> None:
+        """Add new deck in the back of the deck."""
+        self._cards.extend(deck._cards)
 
     def shuffle(self) -> None:
         """Shuffle the deck."""
