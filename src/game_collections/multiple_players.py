@@ -1,4 +1,4 @@
-import asyncio
+from threading import Thread
 import player_types
 from .deck import Deck
 
@@ -41,14 +41,14 @@ class MultiplePlayers:
         for player in self.players:
             player.show_cards_in_hand()
 
-    async def choose_cards(self) -> None:
-        loop = asyncio.get_event_loop()
-        tasks = []
-
+    def choose_cards(self) -> None:
+        threads = []
         for player in self.players:
-            tasks.append(loop.create_task(player.choose_card()))
-        loop.run_until_complete(asyncio.wait(tasks))
-        loop.close()
+            one_thread = Thread(target=player.choose_card)
+            one_thread.start()
+            threads.append(one_thread)
+        for one_thread in threads:
+            one_thread.join()
 
     def show_all_player_stats(self):
         for one_player in self.players:
