@@ -1,4 +1,9 @@
+# std
+import os
+from subprocess import call
 import socket
+
+# own
 from .utils import get_full_message, send_message_to
 
 
@@ -35,6 +40,8 @@ class Client:
             if "Choose" in response:
                 user_input = input()
                 send_message_to(s, user_input)
+            elif response == "clear":
+                _ = call("clear" if os.name == "posix" else "cls")
 
 
 if __name__ == "__main__":

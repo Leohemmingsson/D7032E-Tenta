@@ -41,18 +41,22 @@ class ContextLoader:
         return self._package.path
 
     @property
+    def _deck_path(self) -> str:
+        return self._package.deck_path
+
+    @property
     def all_players(self) -> game_collections.MultiplePlayers:
         """
         Starts the server listens for clients and creates players.
         """
         clients_connection_info = self._server.start_server(self.client_count)
-        list_of_players = create_players(clients_connection_info, self.bot_count)
+        list_of_players = create_players(clients_connection_info, self.bot_count, self._deck_path)
         all_players = game_collections.MultiplePlayers(list_of_players)
 
         return all_players
 
     @property
     def deck(self) -> game_collections.Deck:
-        deck = game_collections.Deck(filename=self._package.deck_path)
+        deck = game_collections.Deck(filename=self._deck_path)
         deck.shuffle()
         return deck

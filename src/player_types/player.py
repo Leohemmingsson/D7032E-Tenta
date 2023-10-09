@@ -1,13 +1,15 @@
 import socket
 
-from data_structures import ClientConnectionInfo, Card
+from data_structures import ClientConnectionInfo, Card, Map
 from game_collections import Deck
 
 
 class Player:
-    def __init__(self) -> None:
+    def __init__(self, id: int, map: Map) -> None:
+        self._id = id
+        self._map = map
         self._score = 0
-        self.hand = Deck()
+        self._hand = Deck()
         self._chosen_card = Deck()
 
     def send_message(self, message: str) -> None:
@@ -19,13 +21,12 @@ class Player:
     def choose_card(self) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
+    def clear_screen(self) -> None:
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
     @property
     def id(self) -> int:
         return self._id
-
-    @id.setter
-    def id(self, value: int) -> None:
-        self._id = value
 
     @property
     def socket_obj(self) -> socket.socket:
@@ -41,7 +42,7 @@ class Player:
 
     @property
     def cards_in_hand(self) -> Deck:
-        return self.hand
+        return self._hand
 
     @property
     def chosen_cards(self) -> Deck:
@@ -62,18 +63,10 @@ class Player:
         self._score += value
 
     def add_card_to_hand(self, card: Card) -> None:
-        self.hand.add_card(card)
+        self._hand.add_card(card)
 
-    def _choose_card_from_site(self, site: str) -> None:
-        """
-        Takes chosen card from hand and places in chosen cards.
-        """
-        card = self.hand.pick_from_site(site)
-        self._chosen_card.add_card(card)
-
-    def _choose_first_card(self) -> None:
-        card = self.hand.draw_first_card()
-        self._chosen_card.add_card(card)
+    def add_deck_to_hand(self, deck: Deck) -> None:
+        self._hand.add_deck(deck)
 
     def get_all_cards(self) -> Deck:
         """
@@ -82,21 +75,41 @@ class Player:
         """
 
         all_cards = Deck()
-        all_cards.add_deck(self.hand)
+        all_cards.add_deck(self._hand)
         all_cards.add_deck(self._chosen_card)
-        self.hand = Deck()
+        self._hand = Deck()
         self._chosen_card = Deck()
         return all_cards
 
+    def get_all_cards_in_hand(self) -> Deck:
+        hand = self._hand
+        self.hand = Deck()
+        return hand
+
+    def _choose_card_from_site(self, site: str) -> None:
+        """
+        Takes chosen card from hand and places in chosen cards.
+        """
+        card = self._hand.pick_from_site(site)
+        self._chosen_card.add_card(card)
+
+    def _choose_first_card(self) -> None:
+        card = self._hand.draw_first_card()
+        self._chosen_card.add_card(card)
+
     @classmethod
-    def from_client_connection_info(cls, connection_info: ClientConnectionInfo) -> "Player":
-        c = cls()
-        c.id = connection_info.id
+    def from_client_connection_info(cls, connection_info: ClientConnectionInfo, map: Map) -> "Player":
+        """
+        Construct a person using ClientConnectionInfo
+        """
+        c = cls(connection_info.id, map)
         c.socket_obj = connection_info.socket_connection
         return c
 
     @classmethod
-    def from_id(cls, id: int) -> "Player":
-        c = cls()
-        c.id = id
+    def from_id(cls, id: int, map: Map) -> "Player":
+        """
+        Construct a person using id
+        """
+        c = cls(id, map)
         return c

@@ -20,18 +20,26 @@ class Boomerang:
 
         self.players.broadcast("Starting game")
         for _ in range(4):
-            self._start_rount()
+            self._start_round()
             self._count_score()
+            self._score_alternatives()
             self._reset_round()
         input()
 
-    def _start_rount(self) -> None:
+    def _start_round(self) -> None:
         self.players.deal_cards(self.deck, 7)
         for _ in range(7):
             self.players.show_each_player_their_cards()
             self.players.choose_cards()
+            self.players.rotate_cards_in_hand()
+            self.players.clear_screen()
+            self.players.show_all_players_draft()
+            self.players.broadcast("-----------------------------------")
 
     def _count_score(self) -> None:
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
+    def _score_alternatives(self) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def _reset_round(self) -> None:

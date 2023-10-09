@@ -10,3 +10,6 @@ class Bot(Player):
 
     def choose_card(self) -> None:
         self._choose_first_card()
+
+    def clear_screen(self) -> None:
+        pass

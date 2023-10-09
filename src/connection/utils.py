@@ -23,7 +23,12 @@ def get_full_message(s, HEADERSIZE: int | None = None) -> str:
             message_length = int(message[:HEADERSIZE])
             new_message = False
 
-        full_message += message.decode("utf-8")
+        try:
+            full_message += message.decode("utf-8")
+        except UnicodeDecodeError:
+            print("UnicodeDecodeError")
+            print(message)
+            exit()
 
         current_length = len(full_message) - HEADERSIZE
         if current_length == message_length:

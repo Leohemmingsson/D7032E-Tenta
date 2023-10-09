@@ -4,7 +4,7 @@ import yaml
 class PackageData:
     def __init__(self, path) -> None:
         self._deck_filename = path + "/cards.csv"
-        self.load_data_from_config(path + "/config.yml")
+        self._load_data_from_config(path + "/config.yml")
         self._path = path
 
     def __repr__(self) -> str:
@@ -26,7 +26,7 @@ class PackageData:
     def path(self) -> str:
         return self._path
 
-    def load_data_from_config(self, path: str) -> None:
+    def _load_data_from_config(self, path: str) -> None:
         with open(path, "r") as file:
             config_values = yaml.safe_load(file)
         self._name = config_values["about"]["name"]

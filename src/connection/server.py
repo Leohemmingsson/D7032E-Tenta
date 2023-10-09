@@ -42,6 +42,7 @@ class Server:
 
     def _connect_to_socket(self, number_of_clients):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((socket.gethostname(), self.PORT))
         s.listen(5)
         self.s = s

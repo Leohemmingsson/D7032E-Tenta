@@ -1,4 +1,8 @@
+# std
 from threading import Thread
+from collections import deque
+
+# own
 import player_types
 from .deck import Deck
 
@@ -50,12 +54,31 @@ class MultiplePlayers:
         for one_thread in threads:
             one_thread.join()
 
-    def show_all_player_stats(self):
-        for one_player in self.players:
-            print(one_player.id)
-            print(one_player.score)
-            print("Cards in hand:")
-            print(one_player.cards_in_hand)
-            print("Cards chosen:")
-            print(one_player.all_chosen_cards)
-            print("------")
+    def rotate_cards_in_hand(self, reversed: bool = False) -> None:
+        all_decks = []
+        for player in self.players:
+            all_decks.append(player.get_all_cards_in_hand())
+
+        all_decks = deque(all_decks)
+        rot = 1 if reversed else -1
+        all_decks.rotate(rot)
+
+        i = 0
+        for player in self.players:
+            player.add_deck_to_hand(all_decks[i])
+            i += 1
+
+    def clear_screen(self):
+        for player in self.players:
+            player.clear_screen()
+
+    def show_all_players_draft(self):
+        message = ""
+        for player in self.players:
+            if len(player.chosen_cards) == 0:
+                continue
+            message += f"Player {player.id}\n"
+            message += str(player.chosen_cards)
+            message += "------\n"
+
+        self.broadcast(message)

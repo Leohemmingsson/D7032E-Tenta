@@ -11,6 +11,12 @@ class ClientPlayer(Player):
         send_message_to(self.socket_obj, str(self.hand))
 
     def choose_card(self) -> None:
-        send_message_to(self.socket_obj, "Choose card:")
-        site = get_full_message(self.socket_obj)
-        self._choose_card_from_site(site)
+        if len(self.hand) == 1:
+            self._chosen_card.add_card(self.hand.draw_first_card())
+        else:
+            send_message_to(self.socket_obj, "Choose card:")
+            site = get_full_message(self.socket_obj)
+            self._choose_card_from_site(site)
+
+    def clear_screen(self) -> None:
+        send_message_to(self.socket_obj, "clear")
