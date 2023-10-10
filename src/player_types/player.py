@@ -59,6 +59,10 @@ class Player:
         """
         return self._chosen_card
 
+    @property
+    def has_completed_region_bonus(self) -> bool:
+        return self._map.has_completed_any_region
+
     def add_score(self, value: int) -> None:
         self._score += value
 
@@ -90,6 +94,7 @@ class Player:
         """
         Takes chosen card from hand and places in chosen cards.
         """
+        self._map.visit_place(site)
         card = self._hand.pick_from_site(site)
         self._chosen_card.add_card(card)
 

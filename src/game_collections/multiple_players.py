@@ -15,6 +15,17 @@ class MultiplePlayers:
     def __init__(self, players: list[player_types.Player]) -> None:
         self.players = players
 
+    @property
+    def get_players_with_completed_region_bonus(self) -> list[player_types.Player] | None:
+        players_with_completed_region_bonus = []
+        for one_player in self.players:
+            if one_player.has_completed_region_bonus:
+                players_with_completed_region_bonus.append(one_player)
+
+        if len(players_with_completed_region_bonus) == 0:
+            return None
+        return players_with_completed_region_bonus
+
     def broadcast(self, message: str) -> None:
         """
         Sends the same message to all players.
@@ -82,3 +93,10 @@ class MultiplePlayers:
             message += "------\n"
 
         self.broadcast(message)
+
+    def count_and_divide_throw_and_catch_score(self):
+        for one_player in self.players:
+            chosen_cards = one_player.all_chosen_cards
+            diff_score = abs(chosen_cards[0].card_number - chosen_cards[-1].card_number)
+            one_player.send_message(f"You got {diff_score} points from Throw and catch.")
+            one_player.add_score(diff_score)

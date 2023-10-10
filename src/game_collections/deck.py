@@ -54,6 +54,9 @@ class Deck:
         for card in self._cards:
             yield card
 
+    def __getitem__(self, index: int) -> Card:
+        return self._cards[index]
+
     def add_card(self, card: Card) -> None:
         """Add a card to the deck."""
         self._cards.append(card)

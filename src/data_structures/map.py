@@ -10,7 +10,7 @@ class Map:
         self.places = self._create_map_from_deck(deck_path)
 
     @property
-    def is_completed_any_region(self) -> bool:
+    def has_completed_any_region(self) -> bool:
         for _, places in self.places.items():
             all_visited = True
             for one_place in places:
@@ -28,6 +28,15 @@ class Map:
                 if one_place.is_visited:
                     counter += 1
         return counter
+
+    @property
+    def get_visited_places(self) -> list[str]:
+        visited_places = []
+        for _, places in self.places.items():
+            for one_place in places:
+                if one_place.is_visited:
+                    visited_places.append(one_place.site)
+        return visited_places
 
     def visit_place(self, site: str) -> None:
         for _, places in self.places.items():
