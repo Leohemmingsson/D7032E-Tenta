@@ -29,10 +29,12 @@ class Boomerang:
     def _start_round(self) -> None:
         self.players.deal_cards(self.deck, 7)
         for _ in range(7):
+            print("show each player their cards")
             self.players.show_each_player_their_cards()
             self.players.choose_cards()
             self.players.rotate_cards_in_hand()
             self.players.clear_screen()
+            print("Show all players draft")
             self.players.show_all_players_draft()
             self.players.broadcast("-----------------------------------")
 

@@ -83,7 +83,7 @@ class Player:
 
     def get_all_cards_in_hand(self) -> Deck:
         hand = self._hand
-        self.hand = Deck()
+        self._hand = Deck()
         return hand
 
     def _choose_card_from_site(self, site: str) -> None:

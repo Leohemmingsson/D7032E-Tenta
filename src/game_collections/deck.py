@@ -105,8 +105,8 @@ class Deck:
         if cards is not None and filename is not None:
             raise ValueError("Either cards or filename must be specified, not both.")
 
-        if type(cards) != list and cards is not None:
+        if not isinstance(cards, list) and cards is not None:
             raise TypeError(f"cards must be of [list | None] type, not {type(cards)}")
 
-        if type(filename) != str and filename is not None:
+        if not isinstance(filename, str) and filename is not None:
             raise TypeError(f"filename must be of [str | None] type, not {type(filename)}")

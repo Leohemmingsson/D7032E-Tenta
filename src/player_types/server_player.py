@@ -11,11 +11,11 @@ class ServerPlayer(Player):
         print(message)
 
     def show_cards_in_hand(self) -> None:
-        print(self.hand)
+        print(self._hand)
 
     def choose_card(self) -> None:
-        if len(self.hand) == 1:
-            self._chosen_card.add_card(self.hand.draw_first_card())
+        if len(self._hand) == 1:
+            self._chosen_card.add_card(self._hand.draw_first_card())
         else:
             print("Choose card:")
             site = input()
