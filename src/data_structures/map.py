@@ -10,17 +10,6 @@ class Map:
         self.places = self._create_map_from_deck(deck_path)
 
     @property
-    def has_completed_any_region(self) -> bool:
-        for _, places in self.places.items():
-            all_visited = True
-            for one_place in places:
-                if not one_place.is_visited:
-                    all_visited = False
-            if all_visited:
-                return True
-        return False
-
-    @property
     def nr_of_visited_places(self) -> int:
         counter = 0
         for _, places in self.places.items():
@@ -37,6 +26,16 @@ class Map:
                 if one_place.is_visited:
                     visited_places.append(one_place.site)
         return visited_places
+
+    def get_completed_regions_not_taken(self, taken: list) -> list[str]:
+        completed_regions = []
+        for region, places in self.places.items():
+            if region in taken:
+                continue
+
+            if all(place.is_visited for place in places):
+                completed_regions.append(region)
+        return completed_regions
 
     def visit_place(self, site: str) -> None:
         for _, places in self.places.items():

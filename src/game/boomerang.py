@@ -34,7 +34,7 @@ class Boomerang:
             self.players.show_each_player_their_cards()
             self.players.choose_cards()
             self.players.rotate_cards_in_hand()
-            # self.players.clear_screen()
+            self.players.clear_screen()
 
             self.players.show_all_players_draft()
             self.players.broadcast("-----------------------------------")

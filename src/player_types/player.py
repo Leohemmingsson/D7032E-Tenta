@@ -59,9 +59,8 @@ class Player:
         """
         return self._chosen_card
 
-    @property
-    def has_completed_region_bonus(self) -> bool:
-        return self._map.has_completed_any_region
+    def get_completed_regions_not_taken(self, taken: list[str]) -> list[str]:
+        return self._map.get_completed_regions_not_taken(taken)
 
     def add_score(self, value: int) -> None:
         self._score += value
