@@ -26,10 +26,11 @@ class Boomerang:
             self._count_score_after_round()
             self._reset_round()
         self._count_score_after_game()
+        self.players.show_results_and_winner()
         input()
 
     def _start_round(self) -> None:
-        self.players.deal_cards(self.deck, self._CARDS_IN_HAND)
+        self._new_round()
         for _ in range(self._CARDS_IN_HAND):
             self.players.show_each_player_their_cards()
             self.players.choose_cards()
@@ -60,6 +61,10 @@ class Boomerang:
 
     def _set_constants(self) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
+    def _new_round(self) -> None:
+        self.players.deal_cards(self.deck, self._CARDS_IN_HAND)
+        self.players.new_round()
 
     def _reset_round(self) -> None:
         cards_from_players = self.players.get_all_cards()

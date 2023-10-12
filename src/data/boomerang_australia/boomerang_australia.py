@@ -16,13 +16,15 @@ class BoomerangAustralia(Boomerang):
                 if one_region not in self._taken_regions:
                     self._taken_regions.append(one_region)
 
-                player.add_score(self._REGION_BONUS_SCORE)
+                player.add_score(self._REGION_BONUS_SCORE, "Region bonus")
                 player.send_message("#####")
                 player.send_message("# You got 3 points for completing a region.")
                 player.send_message("")
         self._is_region_bonus_taken = True
 
     def _count_score_after_round(self) -> None:
+        self.players.give_points(1, "Round bonus to test points")
+
         self.players.broadcast("#####")
         self.players.broadcast("# This rounds score:")
         self.players.count_and_divide_throw_and_catch_score()

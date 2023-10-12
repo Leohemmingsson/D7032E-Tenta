@@ -1,6 +1,6 @@
 import socket
 
-from data_structures import ClientConnectionInfo, Card, Map
+from data_structures import ClientConnectionInfo, Card, Map, Scoring
 from game_collections import Deck
 
 
@@ -8,7 +8,7 @@ class Player:
     def __init__(self, id: int, map: Map) -> None:
         self._id = id
         self._map = map
-        self._score = 0
+        self._score = Scoring()
         self._hand = Deck()
         self._chosen_card = Deck()
 
@@ -38,7 +38,7 @@ class Player:
 
     @property
     def score(self) -> int:
-        return self._score
+        return int(self._score)
 
     @property
     def cards_in_hand(self) -> Deck:
@@ -62,8 +62,8 @@ class Player:
     def get_completed_regions_not_taken(self, taken: list[str]) -> list[str]:
         return self._map.get_completed_regions_not_taken(taken)
 
-    def add_score(self, value: int) -> None:
-        self._score += value
+    def add_score(self, value: int, reason: str) -> None:
+        self._score.add_score(value, reason)
 
     def add_card_to_hand(self, card: Card) -> None:
         self._hand.add_card(card)
@@ -100,6 +100,12 @@ class Player:
     def _choose_first_card(self) -> None:
         card = self._hand.draw_first_card()
         self._chosen_card.add_card(card)
+
+    def new_round(self):
+        self._score.new_round()
+
+    def show_total_score(self):
+        self.send_message(repr(self._score))
 
     @classmethod
     def from_client_connection_info(cls, connection_info: ClientConnectionInfo, map: Map) -> "Player":
