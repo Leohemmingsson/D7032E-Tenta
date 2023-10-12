@@ -59,6 +59,20 @@ class Player:
         """
         return self._chosen_card
 
+    @property
+    def get_total_score_summary(self) -> str:
+        """
+        Returns formatted string with score for each round divided into categories.
+        """
+        return repr(self._score)
+
+    @property
+    def get_round_score_summary(self) -> str:
+        """
+        Returns formatted string with score of this round divided into categories.
+        """
+        return self._score.this_round_summary
+
     def get_completed_regions_not_taken(self, taken: list[str]) -> list[str]:
         return self._map.get_completed_regions_not_taken(taken)
 
@@ -103,9 +117,6 @@ class Player:
 
     def new_round(self):
         self._score.new_round()
-
-    def show_total_score(self):
-        self.send_message(repr(self._score))
 
     @classmethod
     def from_client_connection_info(cls, connection_info: ClientConnectionInfo, map: Map) -> "Player":

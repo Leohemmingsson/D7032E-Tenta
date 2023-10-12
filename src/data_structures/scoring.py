@@ -26,6 +26,17 @@ class Scoring:
             score += sum(one_score)
         return score
 
+    @property
+    def this_round_summary(self) -> str:
+        rep = "#####\n"
+        rep += "# This rounds score:\n"
+        for key, value in self._score_per_type.items():
+            if value[-1] == 0:
+                continue
+
+            rep += f"# {key}: {value[-1]}\n"
+        return rep
+
     def add_score(self, value: int, reason: str) -> None:
         if reason not in self._score_per_type:
             self._score_per_type[reason] = [0 for _ in range(self._round)]

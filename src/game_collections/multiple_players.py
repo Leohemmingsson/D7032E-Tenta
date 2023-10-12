@@ -96,7 +96,6 @@ class MultiplePlayers:
         for one_player in self.players:
             chosen_cards = one_player.all_chosen_cards
             diff_score = abs(chosen_cards[0].card_number - chosen_cards[-1].card_number)
-            one_player.send_message(f"# You got {diff_score} points from Throw and catch.")
             one_player.add_score(diff_score, "Throw and catch")
 
     def new_round(self):
@@ -105,8 +104,14 @@ class MultiplePlayers:
 
     def show_results_and_winner(self):
         for player in self.players:
-            player.show_total_score()
+            score_summary = player.get_total_score_summary
+            player.send_message(score_summary)
 
     def give_points(self, points: int, reason: str) -> None:
         for one_player in self.players:
             one_player.add_score(points, reason)
+
+    def show_round_score_summary(self):
+        for player in self.players:
+            round_score_sumamry = player.get_round_score_summary
+            player.send_message(round_score_sumamry)
