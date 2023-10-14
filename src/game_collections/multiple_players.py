@@ -1,6 +1,5 @@
 # std
 from threading import Thread
-from collections import deque
 
 # own
 import player_types
@@ -68,14 +67,26 @@ class MultiplePlayers:
         for player in self.players:
             all_decks.append(player.get_all_cards_in_hand())
 
-        all_decks = deque(all_decks)
-        rot = 1 if reversed else -1
-        all_decks.rotate(rot)
+        all_decks = self.rotate_list(all_decks, reversed)
 
         i = 0
         for player in self.players:
             player.add_deck_to_hand(all_decks[i])
             i += 1
+
+    def rotate_list(self, values: list, reversed: bool = False):
+        """
+        Rotate list, if not reveresed: [1, 2, 3] => [3, 1, 2]
+        if reversed: [1, 2, 3] => [2, 3, 1]
+        """
+        if not reversed:
+            last_val = values.pop(-1)
+            values.insert(0, last_val)
+        else:
+            first_val = values.pop(0)
+            values.append(first_val)
+
+        return values
 
     def clear_screen(self):
         for player in self.players:
