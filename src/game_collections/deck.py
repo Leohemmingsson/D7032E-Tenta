@@ -96,6 +96,8 @@ class Deck:
         created_cards = []
 
         df = pd.read_csv(filename)
+        df = df.where(pd.notnull(df), None)  # Replace NaN with None
+
         card_data: list[dict] = df.to_dict(orient="records")
 
         for element in card_data:

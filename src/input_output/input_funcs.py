@@ -1,6 +1,3 @@
-"""
-All initial user selections are handled here.
-"""
 from data_structures import PackageData
 
 

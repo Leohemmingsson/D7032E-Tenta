@@ -33,6 +33,7 @@ class Boomerang:
     def _start_round(self) -> None:
         self._new_round()
         for i in range(self._CARDS_IN_HAND):
+            self.players.show_visited_sites()
             self.players.show_each_player_their_cards()
             self.players.choose_cards()
 
@@ -41,14 +42,15 @@ class Boomerang:
             else:
                 self.players.rotate_cards_in_hand(reversed=False)
 
-            # self.players.clear_screen()
+            self.players.clear_screen()
 
             self.players.show_all_players_draft()
             self.players.broadcast("-----------------------------------")
             self._count_score_after_draft()
 
     def _set_constants(self) -> None:
-        # Required, and should be declared when overwriting this funtion#
+        # Required, and should be declared when overwriting this funtion
+        # Only reason for declaring here is for type hints
         self._NR_OF_ROUNDS = 4
         self._CARDS_IN_HAND = 7
 

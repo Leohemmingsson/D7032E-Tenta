@@ -1,9 +1,10 @@
+# own imports
 import game_collections
 from connection import Server
-from .create_players import create_players
-from .user_selections import get_server_settings_from_user, get_package_from_user
-from .read_file_structure import get_dir_in_path
+from input_output import get_server_settings_from_user, get_package_from_user
+from utils import get_dir_in_path
 from data_structures import PackageData
+from .create_players import create_players
 
 
 class ContextLoader:

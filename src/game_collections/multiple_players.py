@@ -1,9 +1,11 @@
 # std
 from threading import Thread
+from typing import Callable
 
 # own
 import player_types
 from .deck import Deck
+from utils import rotate_list
 
 
 class MultiplePlayers:
@@ -54,6 +56,16 @@ class MultiplePlayers:
             player.show_cards_in_hand()
 
     def choose_cards(self) -> None:
+        """
+        Creates one thread per player so each player can choose a card.
+        When everyone has chosen a card (simultaneously), the function is done
+        """
+
+        # TODO:
+        # If there is some more time, make a error in the thread crash the game.
+        # Now if input from one player does not exist (card in deck), the game will continue without
+        # any card being chosen
+
         threads = []
         for player in self.players:
             one_thread = Thread(target=player.choose_card)
@@ -67,26 +79,12 @@ class MultiplePlayers:
         for player in self.players:
             all_decks.append(player.get_all_cards_in_hand())
 
-        all_decks = self.rotate_list(all_decks, reversed)
+        all_decks = rotate_list(all_decks, reversed)
 
         i = 0
         for player in self.players:
             player.add_deck_to_hand(all_decks[i])
             i += 1
-
-    def rotate_list(self, values: list, reversed: bool = False):
-        """
-        Rotate list, if not reveresed: [1, 2, 3] => [3, 1, 2]
-        if reversed: [1, 2, 3] => [2, 3, 1]
-        """
-        if not reversed:
-            last_val = values.pop(-1)
-            values.insert(0, last_val)
-        else:
-            first_val = values.pop(0)
-            values.append(first_val)
-
-        return values
 
     def clear_screen(self):
         for player in self.players:
@@ -103,11 +101,15 @@ class MultiplePlayers:
 
         self.broadcast(message)
 
-    def count_and_divide_throw_and_catch_score(self):
+    def show_visited_sites(self):
         for one_player in self.players:
-            chosen_cards = one_player.all_chosen_cards
-            diff_score = abs(chosen_cards[0].card_number - chosen_cards[-1].card_number)
-            one_player.add_score(diff_score, "Throw and catch")
+            visited_sites = one_player.visited_sites
+            one_player.send_message(f"visited_sites: \n{visited_sites}")
+
+    def count_and_divide_score_with_func(self, score_name: str, func: Callable) -> None:
+        for one_player in self.players:
+            diff_score = func(one_player)
+            one_player.add_score(diff_score, score_name)
 
     def new_round(self):
         for player in self.players:

@@ -1,24 +1,20 @@
 collection:
-  points:
-    Leves: 1
-    Wildflowers: 2
-    Shells: 3
-    Souvenirs: 5
+  Leaves: 1
+  Wildflowers: 2
+  Shells: 3
+  Souvenirs: 5
 
 animal:
-  points:
-    Kangaroos: 3
-    Emus: 4
-    Wombats: 5
-    Koalas: 7
-    Platypuses: 9
+  Kangaroos: 3
+  Emus: 4
+  Wombats: 5
+  Koalas: 7
+  Platypuses: 9
 
 acitvity:
-  single_usage: True
-  combination_points:
-    1: 0
-    2: 2
-    3: 4
-    4: 7
-    5: 10
-    6: 15
+  1: 0
+  2: 2
+  3: 4
+  4: 7
+  5: 10
+  6: 15

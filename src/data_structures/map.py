@@ -10,7 +10,7 @@ class Map:
         self.places = self._create_map_from_deck(deck_path)
 
     @property
-    def nr_of_visited_places(self) -> int:
+    def nr_of_visited_sites(self) -> int:
         counter = 0
         for _, places in self.places.items():
             for one_place in places:
@@ -19,12 +19,12 @@ class Map:
         return counter
 
     @property
-    def get_visited_places(self) -> list[str]:
+    def get_visited_sites(self) -> list[str]:
         visited_places = []
         for _, places in self.places.items():
             for one_place in places:
                 if one_place.is_visited:
-                    visited_places.append(one_place.site)
+                    visited_places.append(one_place.name)
         return visited_places
 
     def get_completed_regions_not_taken(self, taken: list) -> list[str]:
@@ -37,7 +37,7 @@ class Map:
                 completed_regions.append(region)
         return completed_regions
 
-    def visit_place(self, site: str) -> None:
+    def visit_site(self, site: str) -> None:
         for _, places in self.places.items():
             for one_place in places:
                 if one_place.site == site:
@@ -50,14 +50,19 @@ class Map:
         card_data: list[dict] = df.to_dict(orient="records")
 
         for element in card_data:
-            one_place = Places(element["site"])
+            one_place = Places(element["site"], element["name"])
             places[element["region"]].append(one_place)
 
         return dict(places)
 
 
 class Places:
-    def __init__(self, site: str, visited: bool = False):
+    """
+    This is a mockup of a site, it does not contain all the information of a site
+    """
+
+    def __init__(self, site: str, name: str, visited: bool = False):
+        self.name = name
         self.site = site
         self._is_visited = visited
 

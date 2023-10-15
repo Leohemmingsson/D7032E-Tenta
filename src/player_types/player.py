@@ -73,6 +73,10 @@ class Player:
         """
         return self._score.this_round_summary
 
+    @property
+    def visited_sites(self) -> list[str]:
+        return self._map.get_visited_sites
+
     def get_completed_regions_not_taken(self, taken: list[str]) -> list[str]:
         return self._map.get_completed_regions_not_taken(taken)
 
@@ -107,7 +111,7 @@ class Player:
         """
         Takes chosen card from hand and places in chosen cards.
         """
-        self._map.visit_place(site)
+        self._map.visit_site(site)
         card = self._hand.pick_from_site(site)
         self._chosen_card.add_card(card)
 
