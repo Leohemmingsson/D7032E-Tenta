@@ -1,11 +1,13 @@
 # std
 from typing import Protocol
+from collections import defaultdict
 
 # pip
 import yaml
 
 # own
 from player_types import Player
+from input_output import send_dict_to_player
 
 
 class MultiplePlayers(Protocol):
@@ -75,6 +77,38 @@ def animal_bonus(one_player: Player):
         score += bonuses["animal"][one_animal]
 
     return score
+
+
+def site_bonus(one_player: Player):
+    score = one_player.nr_or_visited_sites
+    return score
+
+
+def activity_bonus(one_player: Player):
+    bonuses = _get_collectives_bonus()
+    chosen_activities = one_player.get_chosen_activities
+    all_cards = one_player.all_chosen_cards
+    activity_count = defaultdict(int)
+    for one_card in all_cards:
+        if one_card.activity is None:
+            continue
+
+        if one_card.activity not in chosen_activities:
+            activity_count[one_card.activity] += 1
+
+    one_player.send_message("Collected activities this round:")
+    send_dict_to_player(one_player, activity_count)
+
+    for one_activity in activity_count:
+        count = activity_count[one_activity]
+        score = bonuses["activity"][count]
+        answer = one_player.ask(f"Want to keep {one_activity}({count}) [{score} points]? (Y/N)")
+        if answer == "Y" or answer == "y":
+            one_player.choose_activity(one_activity)
+            return score
+
+    one_player.choose_activity(None)
+    return 0
 
 
 def _get_collectives_bonus() -> dict:

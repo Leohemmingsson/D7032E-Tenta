@@ -116,9 +116,17 @@ class MultiplePlayers:
             player.new_round()
 
     def show_results_and_winner(self):
+        winner = {"id": "", "score": 0, "throw_and_cath_score": 0}
         for player in self.players:
             score_summary = player.get_total_score_summary
-            player.send_message(score_summary)
+            if score_summary["score"] > winner["score"]:
+                winner = {
+                    "id": player.id,
+                    "score": score_summary["score"],
+                    "thorw_and_catch_score": 0,
+                }
+            player.send_message(score_summary["repr"])
+        self.broadcast(f"Winner is player {winner['id']} with {winner['score']} points!")
 
     def give_points(self, points: int, reason: str) -> None:
         for one_player in self.players:

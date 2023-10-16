@@ -1,5 +1,5 @@
 from initialize_game import ContextLoader
-from .boomerang import Boomerang
+from game import Boomerang
 
 
 def create_game_from_context(context: ContextLoader) -> Boomerang:

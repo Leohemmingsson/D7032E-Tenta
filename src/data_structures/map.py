@@ -7,29 +7,42 @@ class Map:
         if deck_path == "":
             raise ValueError("Deck path cannot be empty.")
 
-        self.places = self._create_map_from_deck(deck_path)
+        self._places = self._create_map_from_deck(deck_path)
+        self._visited_since_last_get = []
 
     @property
     def nr_of_visited_sites(self) -> int:
         counter = 0
-        for _, places in self.places.items():
+        for _, places in self._places.items():
             for one_place in places:
                 if one_place.is_visited:
                     counter += 1
         return counter
 
     @property
-    def get_visited_sites(self) -> list[str]:
+    def get_all_visited_sites(self) -> list[str]:
         visited_places = []
-        for _, places in self.places.items():
+        for _, places in self._places.items():
             for one_place in places:
                 if one_place.is_visited:
                     visited_places.append(one_place.name)
         return visited_places
 
+    def get_visited_sites_since_last_get(self) -> list[str]:
+        """
+        This resets the counter for visited sites.
+        """
+        visited = self._visited_since_last_get
+        self._visited_since_last_get = []
+        return visited
+
     def get_completed_regions_not_taken(self, taken: list) -> list[str]:
+        """
+        This returns a list of all completed regions that are not taken.
+        No side effects
+        """
         completed_regions = []
-        for region, places in self.places.items():
+        for region, places in self._places.items():
             if region in taken:
                 continue
 
@@ -38,9 +51,12 @@ class Map:
         return completed_regions
 
     def visit_site(self, site: str) -> None:
-        for _, places in self.places.items():
+        for _, places in self._places.items():
             for one_place in places:
                 if one_place.site == site:
+                    if one_place.is_visited:
+                        continue
+                    self._visited_since_last_get.append(one_place.name)
                     one_place._is_visited = True
 
     def _create_map_from_deck(self, deck_path: str) -> dict:

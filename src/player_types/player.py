@@ -11,6 +11,7 @@ class Player:
         self._score = Scoring()
         self._hand = Deck()
         self._chosen_card = Deck()
+        self._chosen_acitivity = []
 
     def send_message(self, message: str) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
@@ -24,12 +25,22 @@ class Player:
     def clear_screen(self) -> None:
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
+    def ask(self, question: str) -> str:
+        raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
+
     @property
     def id(self) -> int:
+        """
+        Returns the id of the player
+        """
         return self._id
 
     @property
     def socket_obj(self) -> socket.socket:
+        """
+        Socket connection used for communications to and from player,
+        there is both a setter and getter
+        """
         return self._socket
 
     @socket_obj.setter
@@ -38,10 +49,16 @@ class Player:
 
     @property
     def score(self) -> int:
+        """
+        Returns the score of the player
+        """
         return int(self._score)
 
     @property
     def cards_in_hand(self) -> Deck:
+        """
+        Returns the cards in hand without side effects
+        """
         return self._hand
 
     @property
@@ -60,11 +77,11 @@ class Player:
         return self._chosen_card
 
     @property
-    def get_total_score_summary(self) -> str:
+    def get_total_score_summary(self) -> dict:
         """
         Returns formatted string with score for each round divided into categories.
         """
-        return repr(self._score)
+        return self._score.summary
 
     @property
     def get_round_score_summary(self) -> str:
@@ -75,18 +92,54 @@ class Player:
 
     @property
     def visited_sites(self) -> list[str]:
-        return self._map.get_visited_sites
+        """
+        Returns a list of all visited sites.
+        """
+        return self._map.get_all_visited_sites
+
+    @property
+    def nr_or_visited_sites(self) -> int:
+        """
+        Returns the total number of visited sites
+        """
+        return self._map.nr_of_visited_sites
+
+    @property
+    def get_chosen_activities(self) -> list[str]:
+        """
+        Returns a list of all chosen activities.
+        """
+        return self._chosen_acitivity
+
+    def get_visited_sites_since_last_get(self) -> list[str]:
+        """
+        Resets the count for visited sites.
+        """
+        return self._map.get_visited_sites_since_last_get()
 
     def get_completed_regions_not_taken(self, taken: list[str]) -> list[str]:
+        """
+        This returns a list of all completed regions that are not taken.
+        No side effects
+        """
         return self._map.get_completed_regions_not_taken(taken)
 
     def add_score(self, value: int, reason: str) -> None:
+        """
+        This is a score ADDER, not setter
+        """
         self._score.add_score(value, reason)
 
     def add_card_to_hand(self, card: Card) -> None:
+        """
+        Append a card to the hand (cards a player can choose)
+        """
         self._hand.add_card(card)
 
     def add_deck_to_hand(self, deck: Deck) -> None:
+        """
+        Works as add card, but with a collection of cards (deck)
+        """
         self._hand.add_deck(deck)
 
     def get_all_cards(self) -> Deck:
@@ -103,9 +156,22 @@ class Player:
         return all_cards
 
     def get_all_cards_in_hand(self) -> Deck:
+        """
+        Returns all cards that a player has in hand.
+        The players hand will also be reset, so the hand is empty after this.
+        """
         hand = self._hand
         self._hand = Deck()
         return hand
+
+    def choose_activity(self, activity: str | None) -> None:
+        self._chosen_acitivity.append(activity)
+
+    def new_round(self):
+        """
+        This should be called when a new round starts.
+        """
+        self._score.new_round()
 
     def _choose_card_from_site(self, site: str) -> None:
         """
@@ -118,9 +184,6 @@ class Player:
     def _choose_first_card(self) -> None:
         card = self._hand.draw_first_card()
         self._chosen_card.add_card(card)
-
-    def new_round(self):
-        self._score.new_round()
 
     @classmethod
     def from_client_connection_info(cls, connection_info: ClientConnectionInfo, map: Map) -> "Player":

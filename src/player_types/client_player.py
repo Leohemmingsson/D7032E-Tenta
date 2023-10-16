@@ -20,3 +20,8 @@ class ClientPlayer(Player):
 
     def clear_screen(self) -> None:
         send_message_to(self.socket_obj, "clear")
+
+    def ask(self, question: str) -> str:
+        send_message_to(self.socket_obj, question)
+        answer = get_full_message(self.socket_obj)
+        return answer

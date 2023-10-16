@@ -20,6 +20,11 @@ class Scoring:
         return rep
 
     @property
+    def summary(self):
+        val = {"repr": repr(self), "score": self.score}
+        return val
+
+    @property
     def score(self) -> int:
         score = 0
         for one_score in self._score_per_type.values():

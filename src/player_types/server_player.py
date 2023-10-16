@@ -23,3 +23,8 @@ class ServerPlayer(Player):
 
     def clear_screen(self) -> None:
         _ = call("clear" if os.name == "posix" else "cls")
+
+    def ask(self, question: str) -> str:
+        print(question)
+        answer = input()
+        return answer

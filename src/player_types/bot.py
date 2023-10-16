@@ -13,3 +13,8 @@ class Bot(Player):
 
     def clear_screen(self) -> None:
         pass
+
+    def ask(self, question: str) -> str:
+        if question.endswith("(Y/N)"):
+            return "Y"
+        return ""

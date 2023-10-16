@@ -1,5 +1,5 @@
-from game import create_game_from_context
 from connection import Client
+from game import create_game_from_context
 from initialize_game import ContextLoader
 from input_output import is_server, get_client_port_from_user
 
