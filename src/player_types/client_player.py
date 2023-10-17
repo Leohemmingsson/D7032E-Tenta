@@ -1,5 +1,5 @@
 from .player import Player
-from connection import send_message_to, get_full_message
+from ..connection import send_message_to, get_full_message
 
 
 class ClientPlayer(Player):

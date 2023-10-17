@@ -1,4 +1,4 @@
-from data_structures import PackageData
+from ..data_structures import PackageData
 
 
 def is_server() -> bool:
@@ -87,13 +87,13 @@ def _get_player_count_from_user() -> tuple[int, int]:
         question = "Enter the number of bots: "
         bots = _get_int_error_handled(question)
 
-        if _is_valid_player_count(players, bots):
+        if is_valid_player_count(players, bots):
             return players, bots
         else:
             print("Invalid player count. Total player count must be between 2 and 4")
 
 
-def _is_valid_player_count(players: int, bots: int) -> bool:
+def is_valid_player_count(players: int, bots: int) -> bool:
     """
     Making sure player count is between 2 and 4, including the one who created the game.
     So actual limits are between 1 and 3

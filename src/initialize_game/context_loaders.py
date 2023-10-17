@@ -1,10 +1,10 @@
 # own imports
-import game_collections
-from connection import Server
-from input_output import get_server_settings_from_user, get_package_from_user
-from utils import get_dir_in_path
-from data_structures import PackageData
-from .create_players import create_players
+from ..card import Deck
+from ..connection import Server
+from ..input_output import get_server_settings_from_user, get_package_from_user
+from ..utils import get_dir_in_path
+from ..data_structures import PackageData
+from ..player_types import MultiplePlayers, create_players
 
 
 class ContextLoader:
@@ -14,7 +14,7 @@ class ContextLoader:
     """
 
     def __init__(self):
-        self._data_folder_name = "./src/data/"
+        self._data_folder_name = "./data/"
         self._server_settings = get_server_settings_from_user()
         all_package_paths = get_dir_in_path(self._data_folder_name)
         all_package_types = [PackageData(self._data_folder_name + path) for path in all_package_paths]
@@ -46,18 +46,18 @@ class ContextLoader:
         return self._package.deck_path
 
     @property
-    def all_players(self) -> game_collections.MultiplePlayers:
+    def all_players(self) -> MultiplePlayers:
         """
         Starts the server listens for clients and creates players.
         """
         clients_connection_info = self._server.start_server(self.client_count)
         list_of_players = create_players(clients_connection_info, self.bot_count, self._deck_path)
-        all_players = game_collections.MultiplePlayers(list_of_players)
+        all_players = MultiplePlayers(list_of_players)
 
         return all_players
 
     @property
-    def deck(self) -> game_collections.Deck:
-        deck = game_collections.Deck(filename=self._deck_path)
+    def deck(self) -> Deck:
+        deck = Deck(filename=self._deck_path)
         deck.shuffle()
         return deck

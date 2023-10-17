@@ -1,4 +1,4 @@
-from player_types import Player
+from ..player_types import Player
 
 
 def send_dict_to_player(player: Player, data: dict) -> None:

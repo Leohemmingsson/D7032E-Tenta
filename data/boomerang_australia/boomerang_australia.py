@@ -1,4 +1,4 @@
-from game import Boomerang
+from src.game import Boomerang
 from .score import count_throw_and_catch_score, collection_bonus, region_bonus, animal_bonus, site_bonus, activity_bonus
 
 

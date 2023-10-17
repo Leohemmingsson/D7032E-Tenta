@@ -1,8 +1,10 @@
+# std
+import random
+
 # Pip package
 import pandas as pd
 
-from data_structures import Card
-import random
+from .card import Card
 from collections.abc import Iterator
 
 

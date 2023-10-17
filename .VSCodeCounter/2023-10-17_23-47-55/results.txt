@@ -1,0 +1,90 @@
+Date : 2023-10-17 23:47:55
+Directory : /home/leo/Documents/programming/D7032E-Tenta
+Total : 45 files,  1036 codes, 224 comments, 361 blanks, all 1621 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| Python           |         37 |        988 |        224 |        355 |      1,567 |
+| YAML             |          3 |         34 |          0 |          4 |         38 |
+| toml             |          1 |          6 |          0 |          2 |          8 |
+| pip requirements |          1 |          3 |          0 |          0 |          3 |
+| Ini              |          1 |          2 |          0 |          0 |          2 |
+| Markdown         |          1 |          2 |          0 |          0 |          2 |
+| Shell Script     |          1 |          1 |          0 |          0 |          1 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |         45 |      1,036 |        224 |        361 |      1,621 |
+| . (Files)                                                                                    |          6 |         29 |          0 |         10 |         39 |
+| data                                                                                         |          7 |        132 |         11 |         48 |        191 |
+| data (Files)                                                                                 |          1 |          2 |          0 |          2 |          4 |
+| data/boomerang_USA                                                                           |          1 |          8 |          0 |          1 |          9 |
+| data/boomerang_australia                                                                     |          5 |        122 |         11 |         45 |        178 |
+| src                                                                                          |         32 |        875 |        213 |        303 |      1,391 |
+| src (Files)                                                                                  |          1 |         10 |          1 |          5 |         16 |
+| src/connection                                                                               |          4 |        135 |         11 |         40 |        186 |
+| src/data_structures                                                                          |          7 |        164 |         13 |         51 |        228 |
+| src/game                                                                                     |          3 |         69 |         27 |         26 |        122 |
+| src/game_collections                                                                         |          2 |         82 |         13 |         31 |        126 |
+| src/initialize_game                                                                          |          2 |         45 |          8 |         16 |         69 |
+| src/input_output                                                                             |          3 |         77 |         35 |         32 |        144 |
+| src/player_types                                                                             |          7 |        269 |         96 |         92 |        457 |
+| src/utils                                                                                    |          3 |         24 |          9 |         10 |         43 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                     | language         | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /home/leo/Documents/programming/D7032E-Tenta/.flake8                                         | Ini              |          2 |          0 |          0 |          2 |
+| /home/leo/Documents/programming/D7032E-Tenta/README.md                                       | Markdown         |          2 |          0 |          0 |          2 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/__init__.py                                | Python           |          2 |          0 |          2 |          4 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_USA/config.yml                   | YAML             |          8 |          0 |          1 |          9 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/__init__.py            | Python           |          2 |          0 |          2 |          4 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/boomerang_australia.py | Python           |         18 |          0 |          7 |         25 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/collectives.yml        | YAML             |         18 |          0 |          2 |         20 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/config.yml             | YAML             |          8 |          0 |          1 |          9 |
+| /home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/score.py               | Python           |         76 |         11 |         33 |        120 |
+| /home/leo/Documents/programming/D7032E-Tenta/main.py                                         | Python           |         15 |          0 |          8 |         23 |
+| /home/leo/Documents/programming/D7032E-Tenta/pyproject.toml                                  | toml             |          6 |          0 |          2 |          8 |
+| /home/leo/Documents/programming/D7032E-Tenta/requirements.txt                                | pip requirements |          3 |          0 |          0 |          3 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/connection/__init__.py                      | Python           |          4 |          0 |          3 |          7 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/connection/client.py                        | Python           |         34 |          5 |         11 |         50 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/connection/server.py                        | Python           |         57 |          6 |         13 |         76 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/connection/utils.py                         | Python           |         40 |          0 |         13 |         53 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/__init__.py                 | Python           |          6 |          0 |          2 |          8 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/card.py                     | Python           |         10 |          3 |          4 |         17 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/client_connection_info.py   | Python           |          7 |          0 |          3 |         10 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/collectives.py              | Python           |          5 |          0 |          3 |          8 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/map.py                      | Python           |         60 |         10 |         18 |         88 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/package_data.py             | Python           |         26 |          0 |          9 |         35 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/data_structures/scoring.py                  | Python           |         50 |          0 |         12 |         62 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/game/__init__.py                            | Python           |          3 |          0 |          2 |          5 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/game/boomerang.py                           | Python           |         56 |         18 |         19 |         93 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/game/create_game.py                         | Python           |         10 |          9 |          5 |         24 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/game_collections/__init__.py                | Python           |          2 |          1 |          3 |          6 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/game_collections/deck.py                    | Python           |         80 |         12 |         28 |        120 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/initialize_game/__init__.py                 | Python           |          2 |          0 |          3 |          5 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/initialize_game/context_loaders.py          | Python           |         43 |          8 |         13 |         64 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/input_output/__init__.py                    | Python           |          9 |          0 |          2 |         11 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/input_output/input_funcs.py                 | Python           |         62 |         28 |         26 |        116 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/input_output/output_funcs.py                | Python           |          6 |          7 |          4 |         17 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/__init__.py                    | Python           |          4 |          0 |          2 |          6 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/bot.py                         | Python           |         14 |          0 |          7 |         21 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/client_player.py               | Python           |         21 |          0 |          7 |         28 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/create_players.py              | Python           |         21 |          0 |          7 |         28 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/multiple_players.py            | Python           |         89 |         24 |         26 |        139 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/player.py                      | Python           |         99 |         70 |         35 |        204 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/player_types/server_player.py               | Python           |         21 |          2 |          8 |         31 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/test_requirements.py                        | Python           |         10 |          1 |          5 |         16 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/utils/__init__.py                           | Python           |          3 |          0 |          2 |          5 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/utils/manipulate_data.py                    | Python           |          8 |          4 |          2 |         14 |
+| /home/leo/Documents/programming/D7032E-Tenta/src/utils/read_file_structure.py                | Python           |         13 |          5 |          6 |         24 |
+| /home/leo/Documents/programming/D7032E-Tenta/start.sh                                        | Shell Script     |          1 |          0 |          0 |          1 |
+| Total                                                                                        |                  |      1,036 |        224 |        361 |      1,621 |
++----------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

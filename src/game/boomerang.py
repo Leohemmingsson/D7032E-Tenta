@@ -2,7 +2,8 @@
 from typing import final
 
 # Own modules
-from game_collections import Deck, MultiplePlayers
+from ..card import Deck
+from ..player_types import MultiplePlayers
 
 
 class Boomerang:

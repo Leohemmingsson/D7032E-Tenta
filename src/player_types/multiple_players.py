@@ -3,9 +3,9 @@ from threading import Thread
 from typing import Callable
 
 # own
-import player_types
-from .deck import Deck
-from utils import rotate_list
+from .player import Player
+from ..card import Deck
+from ..utils import rotate_list
 
 
 class MultiplePlayers:
@@ -13,10 +13,10 @@ class MultiplePlayers:
     This will handle everything that every player should do at the same time.
     """
 
-    def __init__(self, players: list[player_types.Player]) -> None:
+    def __init__(self, players: list[Player]) -> None:
         self.players = players
 
-    def get_players_with_completed_region_bonus(self, taken: list[str]) -> list[player_types.Player]:
+    def get_players_with_completed_region_bonus(self, taken: list[str]) -> list[Player]:
         players_with_completed_region_bonus = []
         for one_player in self.players:
             completed_regions = one_player.get_completed_regions_not_taken(taken)

@@ -1,6 +1,6 @@
 import asyncio
 import socket
-from data_structures import ClientConnectionInfo
+from ..data_structures import ClientConnectionInfo
 from .utils import get_full_message, send_message_to
 
 

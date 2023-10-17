@@ -6,8 +6,8 @@ from collections import defaultdict
 import yaml
 
 # own
-from player_types import Player
-from input_output import send_dict_to_player
+from src.player_types import Player
+from src.input_output import send_dict_to_player
 
 
 class MultiplePlayers(Protocol):
@@ -112,7 +112,7 @@ def activity_bonus(one_player: Player):
 
 
 def _get_collectives_bonus() -> dict:
-    path = "./src/data/boomerang_australia/collectives.yml"
+    path = "./data/boomerang_australia/collectives.yml"
     with open(path, "r") as file:
         values = yaml.safe_load(file)
 

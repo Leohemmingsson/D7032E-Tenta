@@ -1,6 +1,5 @@
 from .player import Player
-from .bot import Bot
-from .client_player import ClientPlayer
-from .server_player import ServerPlayer
+from .multiple_players import MultiplePlayers
+from .create_players import create_players
 
-__all__ = ["Player", "Bot", "ClientPlayer", "ServerPlayer"]
+__all__ = ["Player", "MultiplePlayers", "create_players"]

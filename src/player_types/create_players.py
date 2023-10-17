@@ -1,5 +1,8 @@
-from player_types import Player, ServerPlayer, ClientPlayer, Bot
-from data_structures import ClientConnectionInfo, Map
+from .player import Player
+from .server_player import ServerPlayer
+from .client_player import ClientPlayer
+from .bot import Bot
+from ..data_structures import ClientConnectionInfo, Map
 
 
 def create_players(connection_info: list[ClientConnectionInfo] | None, bot_count: int, deck_path: str) -> list[Player]:

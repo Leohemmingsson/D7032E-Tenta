@@ -1,5 +1,5 @@
 import socket
-from data_structures import ClientConnectionInfo
+from ..data_structures import ClientConnectionInfo
 
 
 def get_full_message(s, HEADERSIZE: int | None = None) -> str:

@@ -1,7 +1,7 @@
-from connection import Client
-from game import create_game_from_context
-from initialize_game import ContextLoader
-from input_output import is_server, get_client_port_from_user
+from src.connection import Client
+from src.game import create_game_from_context
+from src.initialize_game import ContextLoader
+from src.input_output import is_server, get_client_port_from_user
 
 
 def main() -> None:

@@ -1,7 +1,7 @@
 import socket
 
-from data_structures import ClientConnectionInfo, Card, Map, Scoring
-from game_collections import Deck
+from ..data_structures import ClientConnectionInfo, Map, Scoring
+from ..card import Deck, Card
 
 
 class Player:

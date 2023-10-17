@@ -1,0 +1,47 @@
+"filename", "language", "Ini", "toml", "Python", "pip requirements", "YAML", "Shell Script", "Markdown", "comment", "blank", "total"
+"/home/leo/Documents/programming/D7032E-Tenta/.flake8", "Ini", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"/home/leo/Documents/programming/D7032E-Tenta/README.md", "Markdown", 0, 0, 0, 0, 0, 0, 2, 0, 0, 2
+"/home/leo/Documents/programming/D7032E-Tenta/data/__init__.py", "Python", 0, 0, 2, 0, 0, 0, 0, 0, 2, 4
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_USA/config.yml", "YAML", 0, 0, 0, 0, 8, 0, 0, 0, 1, 9
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/__init__.py", "Python", 0, 0, 2, 0, 0, 0, 0, 0, 2, 4
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/boomerang_australia.py", "Python", 0, 0, 18, 0, 0, 0, 0, 0, 7, 25
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/collectives.yml", "YAML", 0, 0, 0, 0, 18, 0, 0, 0, 2, 20
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/config.yml", "YAML", 0, 0, 0, 0, 8, 0, 0, 0, 1, 9
+"/home/leo/Documents/programming/D7032E-Tenta/data/boomerang_australia/score.py", "Python", 0, 0, 76, 0, 0, 0, 0, 11, 33, 120
+"/home/leo/Documents/programming/D7032E-Tenta/main.py", "Python", 0, 0, 15, 0, 0, 0, 0, 0, 8, 23
+"/home/leo/Documents/programming/D7032E-Tenta/pyproject.toml", "toml", 0, 6, 0, 0, 0, 0, 0, 0, 2, 8
+"/home/leo/Documents/programming/D7032E-Tenta/requirements.txt", "pip requirements", 0, 0, 0, 3, 0, 0, 0, 0, 0, 3
+"/home/leo/Documents/programming/D7032E-Tenta/src/connection/__init__.py", "Python", 0, 0, 4, 0, 0, 0, 0, 0, 3, 7
+"/home/leo/Documents/programming/D7032E-Tenta/src/connection/client.py", "Python", 0, 0, 34, 0, 0, 0, 0, 5, 11, 50
+"/home/leo/Documents/programming/D7032E-Tenta/src/connection/server.py", "Python", 0, 0, 57, 0, 0, 0, 0, 6, 13, 76
+"/home/leo/Documents/programming/D7032E-Tenta/src/connection/utils.py", "Python", 0, 0, 40, 0, 0, 0, 0, 0, 13, 53
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/__init__.py", "Python", 0, 0, 6, 0, 0, 0, 0, 0, 2, 8
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/card.py", "Python", 0, 0, 10, 0, 0, 0, 0, 3, 4, 17
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/client_connection_info.py", "Python", 0, 0, 7, 0, 0, 0, 0, 0, 3, 10
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/collectives.py", "Python", 0, 0, 5, 0, 0, 0, 0, 0, 3, 8
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/map.py", "Python", 0, 0, 60, 0, 0, 0, 0, 10, 18, 88
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/package_data.py", "Python", 0, 0, 26, 0, 0, 0, 0, 0, 9, 35
+"/home/leo/Documents/programming/D7032E-Tenta/src/data_structures/scoring.py", "Python", 0, 0, 50, 0, 0, 0, 0, 0, 12, 62
+"/home/leo/Documents/programming/D7032E-Tenta/src/game/__init__.py", "Python", 0, 0, 3, 0, 0, 0, 0, 0, 2, 5
+"/home/leo/Documents/programming/D7032E-Tenta/src/game/boomerang.py", "Python", 0, 0, 56, 0, 0, 0, 0, 18, 19, 93
+"/home/leo/Documents/programming/D7032E-Tenta/src/game/create_game.py", "Python", 0, 0, 10, 0, 0, 0, 0, 9, 5, 24
+"/home/leo/Documents/programming/D7032E-Tenta/src/game_collections/__init__.py", "Python", 0, 0, 2, 0, 0, 0, 0, 1, 3, 6
+"/home/leo/Documents/programming/D7032E-Tenta/src/game_collections/deck.py", "Python", 0, 0, 80, 0, 0, 0, 0, 12, 28, 120
+"/home/leo/Documents/programming/D7032E-Tenta/src/initialize_game/__init__.py", "Python", 0, 0, 2, 0, 0, 0, 0, 0, 3, 5
+"/home/leo/Documents/programming/D7032E-Tenta/src/initialize_game/context_loaders.py", "Python", 0, 0, 43, 0, 0, 0, 0, 8, 13, 64
+"/home/leo/Documents/programming/D7032E-Tenta/src/input_output/__init__.py", "Python", 0, 0, 9, 0, 0, 0, 0, 0, 2, 11
+"/home/leo/Documents/programming/D7032E-Tenta/src/input_output/input_funcs.py", "Python", 0, 0, 62, 0, 0, 0, 0, 28, 26, 116
+"/home/leo/Documents/programming/D7032E-Tenta/src/input_output/output_funcs.py", "Python", 0, 0, 6, 0, 0, 0, 0, 7, 4, 17
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/__init__.py", "Python", 0, 0, 4, 0, 0, 0, 0, 0, 2, 6
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/bot.py", "Python", 0, 0, 14, 0, 0, 0, 0, 0, 7, 21
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/client_player.py", "Python", 0, 0, 21, 0, 0, 0, 0, 0, 7, 28
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/create_players.py", "Python", 0, 0, 21, 0, 0, 0, 0, 0, 7, 28
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/multiple_players.py", "Python", 0, 0, 89, 0, 0, 0, 0, 24, 26, 139
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/player.py", "Python", 0, 0, 99, 0, 0, 0, 0, 70, 35, 204
+"/home/leo/Documents/programming/D7032E-Tenta/src/player_types/server_player.py", "Python", 0, 0, 21, 0, 0, 0, 0, 2, 8, 31
+"/home/leo/Documents/programming/D7032E-Tenta/src/test_requirements.py", "Python", 0, 0, 10, 0, 0, 0, 0, 1, 5, 16
+"/home/leo/Documents/programming/D7032E-Tenta/src/utils/__init__.py", "Python", 0, 0, 3, 0, 0, 0, 0, 0, 2, 5
+"/home/leo/Documents/programming/D7032E-Tenta/src/utils/manipulate_data.py", "Python", 0, 0, 8, 0, 0, 0, 0, 4, 2, 14
+"/home/leo/Documents/programming/D7032E-Tenta/src/utils/read_file_structure.py", "Python", 0, 0, 13, 0, 0, 0, 0, 5, 6, 24
+"/home/leo/Documents/programming/D7032E-Tenta/start.sh", "Shell Script", 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"Total", "-", 2, 6, 988, 3, 34, 1, 2, 224, 361, 1621
