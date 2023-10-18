@@ -14,14 +14,14 @@ class ClientPlayer(Player):
         if len(self._hand) == 1:
             self._chosen_card.add_card(self._hand.draw_first_card())
         else:
-            send_message_to(self.socket_obj, "Choose card:")
+            send_message_to(self.socket_obj, "Choose card:", is_question=True)
             site = get_full_message(self.socket_obj)
-            self._choose_card_from_site(site)
+            self._choose_card_from_site(site["message"])
 
     def clear_screen(self) -> None:
-        send_message_to(self.socket_obj, "clear")
+        send_message_to(self.socket_obj, "clear", special=True)
 
     def ask(self, question: str) -> str:
-        send_message_to(self.socket_obj, question)
+        send_message_to(self.socket_obj, question, is_question=True)
         answer = get_full_message(self.socket_obj)
-        return answer
+        return answer["message"]

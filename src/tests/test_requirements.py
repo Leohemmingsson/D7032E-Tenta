@@ -1,7 +1,9 @@
+# std
+from unittest.mock import patch
+
 # import pytest
 from src.game import ContextLoader
-
-from unittest.mock import patch
+from data.boomerang_australia import AustraliaCard
 
 
 class TestRequirements:
@@ -23,4 +25,36 @@ class TestRequirements:
     @patch("builtins.input", side_effect=["0", "0", "1", "1"])
     def test_count_cards_in_australia(self, mock_input):
         context = ContextLoader()
-        assert len(context.deck) == 28
+        deck = context.deck(AustraliaCard)
+        assert len(deck) == 28
+
+    @patch("builtins.input", side_effect=["0", "0", "1", "1"])
+    def test_shuffle_deck(self, mock_input):
+        context = ContextLoader()
+        assert context.deck(AustraliaCard).__repr__() != context.deck(AustraliaCard).__repr__()
+
+    @patch("builtins.input", side_effect=["0", "0", "1", "1"])
+    def test_dealing_cards_work(self, mock_input):
+        context = ContextLoader()
+        players = context.all_players
+
+        players.deal_cards(context.deck(AustraliaCard), 7)
+
+        for player in players.players:
+            assert len(player.cards_in_hand) == 7
+
+    @patch("builtins.input", side_effect=["0", "0", "1", "1"])
+    def test_australia_dealing_settings(self, mock_input):
+        from src.game import create_game_from_context
+
+        context = ContextLoader()
+        game = create_game_from_context(context)
+        assert game._CARDS_IN_HAND == 7
+
+    @patch("builtins.input", side_effect=["0", "0", "1", "1"])
+    def test_australia_rounds_settings(self, mock_input):
+        from src.game import create_game_from_context
+
+        context = ContextLoader()
+        game = create_game_from_context(context)
+        assert game._NR_OF_ROUNDS == 4

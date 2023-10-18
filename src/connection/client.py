@@ -26,12 +26,9 @@ class Client:
         except ConnectionRefusedError:
             print(f"Connection refused. Make sure the server is running on port {self.PORT}")
 
-    def _listen_to_server(self, s: socket.socket) -> str:
+    def _listen_to_server(self, s: socket.socket) -> dict:
         message = get_full_message(s, self.HEADERSIZE)
         return message
-
-    def _output_formatted_response(self, response: str) -> None:
-        print(response)
 
     def _connect_to_server(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -39,12 +36,13 @@ class Client:
 
         while True:
             response = self._listen_to_server(s)
-            self._output_formatted_response(response)
-            if "Choose" in response or response.endswith("(Y/N)"):
+            print(response["message"])
+            if response["is_question"]:
                 user_input = input()
                 send_message_to(s, user_input)
-            elif response == "clear":
-                _ = call("clear" if os.name == "posix" else "cls")
+            elif response["special"]:
+                if response["message"] == "clear":
+                    call("clear" if os.name == "posix" else "cls")
 
 
 if __name__ == "__main__":

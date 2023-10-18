@@ -38,7 +38,7 @@ class Server:
 
     async def _listen_to_client(self, s_client: socket.socket) -> str:
         message = get_full_message(s_client, self.HEADERSIZE)
-        return message
+        return message["message"]
 
     def _connect_to_socket(self, number_of_clients):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

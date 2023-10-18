@@ -1,8 +1,12 @@
+# std
+import json
 import socket
+
+# own
 from ..data_structures import ClientConnectionInfo
 
 
-def get_full_message(s, HEADERSIZE: int | None = None) -> str:
+def get_full_message(s, HEADERSIZE: int | None = None) -> dict:
     if HEADERSIZE is None:
         HEADERSIZE = 10
 
@@ -32,7 +36,7 @@ def get_full_message(s, HEADERSIZE: int | None = None) -> str:
 
         current_length = len(full_message) - HEADERSIZE
         if current_length == message_length:
-            return full_message[HEADERSIZE:]
+            return json.loads(full_message[HEADERSIZE:])
 
 
 def broadcast_message_to(all_clients_connection_info: list[ClientConnectionInfo], message: str) -> None:
@@ -41,8 +45,9 @@ def broadcast_message_to(all_clients_connection_info: list[ClientConnectionInfo]
             send_message_to(client.socket_connection, message)
 
 
-def send_message_to(s: socket.socket, message: str) -> None:
-    s.send(bytes(_prefix_message(message), "utf-8"))
+def send_message_to(s: socket.socket, message: str, is_question: bool = False, special: bool = False) -> None:
+    wrapped_message = {"message": message, "is_question": is_question, "special": special}
+    s.send(bytes(_prefix_message(json.dumps(wrapped_message)), "utf-8"))
 
 
 def _prefix_message(message, HEADERSIZE: int | None = None) -> str:
