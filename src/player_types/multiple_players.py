@@ -10,7 +10,7 @@ from ..utils import rotate_list
 
 class MultiplePlayers:
     """
-    This will handle everything that every player should do at the same time.
+    This is a wrapper class for a list of players, to make it seemless to work with multiple players.
     """
 
     def __init__(self, players: list[Player]) -> None:
@@ -107,25 +107,42 @@ class MultiplePlayers:
             one_player.send_message(f"visited_sites: \n{visited_sites}")
 
     def count_and_divide_score_with_func(self, score_name: str, func: Callable) -> None:
+        threads = []
         for one_player in self.players:
-            diff_score = func(one_player)
-            one_player.add_score(diff_score, score_name)
+            one_thread = Thread(target=self._count_and_div_score_one_player, args=(one_player, score_name, func))
+            one_thread.start()
+            threads.append(one_thread)
+        for one_thread in threads:
+            one_thread.join()
+
+    def _count_and_div_score_one_player(self, one_player: Player, score_name: str, func: Callable) -> None:
+        diff_score = func(one_player)
+        one_player.add_score(diff_score, score_name)
 
     def new_round(self):
         for player in self.players:
             player.new_round()
 
     def show_results_and_winner(self):
-        winner = {"id": "", "score": 0, "throw_and_cath_score": 0}
+        winner = {}
         for player in self.players:
             score_summary = player.get_total_score_summary
-            if score_summary["score"] > winner["score"]:
+            last_round_score = player.get_round_score_summary_values
+            if "score" not in winner or score_summary["score"] > winner["score"]:
                 winner = {
                     "id": player.id,
                     "score": score_summary["score"],
-                    "thorw_and_catch_score": 0,
+                    "throw_and_catch_score": last_round_score["Throw and catch"],
                 }
+            if score_summary["score"] == winner["score"]:
+                if last_round_score["Throw and catch"] > winner["throw_and_catch_score"]:
+                    winner = {
+                        "id": player.id,
+                        "score": score_summary["score"],
+                        "throw_and_catch_score": last_round_score["Throw and catch"],
+                    }
             player.send_message(score_summary["repr"])
+
         self.broadcast(f"Winner is player {winner['id']} with {winner['score']} points!")
 
     def give_points(self, points: int, reason: str) -> None:

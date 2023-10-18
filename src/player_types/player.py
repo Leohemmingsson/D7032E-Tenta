@@ -91,6 +91,10 @@ class Player:
         return self._score.this_round_summary
 
     @property
+    def get_round_score_summary_values(self) -> dict:
+        return self._score.this_round_summary_values
+
+    @property
     def visited_sites(self) -> list[str]:
         """
         Returns a list of all visited sites.

@@ -103,6 +103,7 @@ def activity_bonus(one_player: Player):
         count = activity_count[one_activity]
         score = bonuses["activity"][count]
         answer = one_player.ask(f"Want to keep {one_activity}({count}) [{score} points]? (Y/N)")
+        one_player.send_message(f"Answer: {answer}")
         if answer == "Y" or answer == "y":
             one_player.choose_activity(one_activity)
             return score

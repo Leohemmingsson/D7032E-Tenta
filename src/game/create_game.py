@@ -9,7 +9,6 @@ def create_game_from_context(context: ContextLoader) -> Boomerang:
     imported as long as it is in the correct folder.
     """
     import_from = _make_path_to_import(context.packet_path)
-    print(f"{import_from = }")
     mod = __import__(import_from)
     boomerang_obj = getattr(mod, context.class_name)(context.all_players, context.deck)
     return boomerang_obj

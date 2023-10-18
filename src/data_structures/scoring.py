@@ -42,6 +42,13 @@ class Scoring:
             rep += f"# {key}: {value[-1]}\n"
         return rep
 
+    @property
+    def this_round_summary_values(self) -> dict:
+        val = {}
+        for key, value in self._score_per_type.items():
+            val[key] = value[-1]
+        return val
+
     def add_score(self, value: int, reason: str) -> None:
         if reason not in self._score_per_type:
             self._score_per_type[reason] = [0 for _ in range(self._round)]

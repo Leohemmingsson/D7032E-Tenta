@@ -29,7 +29,6 @@ class Boomerang:
             self._reset_round()
         self._count_score_after_game()
         self.players.show_results_and_winner()
-        input()
 
     def _start_round(self) -> None:
         self._new_round()

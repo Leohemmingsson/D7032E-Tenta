@@ -37,7 +37,7 @@ class Client:
         while True:
             response = self._listen_to_server(s)
             self._output_formatted_response(response)
-            if "Choose" in response:
+            if "Choose" in response or response.endswith("(Y/N)"):
                 user_input = input()
                 send_message_to(s, user_input)
             elif response == "clear":
