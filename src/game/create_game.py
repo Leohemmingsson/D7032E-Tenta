@@ -10,7 +10,8 @@ def create_game_from_context(context: ContextLoader) -> Boomerang:
     """
     import_from = _make_path_to_import(context.packet_path)
     mod = __import__(import_from)
-    boomerang_obj = getattr(mod, context.class_name)(context.all_players, context.deck)
+    CardClass = getattr(mod, context.card_class_name)
+    boomerang_obj = getattr(mod, context.class_name)(context.all_players, context.deck(CardClass))
     return boomerang_obj
 
 

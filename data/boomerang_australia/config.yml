@@ -1,9 +1,5 @@
 about:
   name: Boomerang Australia
   class_name: BoomerangAustralia
+  card_class_name: AustraliaCard
   is_active: True
-
-naming:
-  animals: animals
-  collections: collections
-  activities: activities

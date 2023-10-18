@@ -14,13 +14,13 @@ class Deck:
     Can be initialized with a list of cards or a filename, only supports csv for now.
     """
 
-    def __init__(self, cards: list[Card] | None = None, filename: str | None = None) -> None:
+    def __init__(self, cards: list[Card] | None = None, filename: str | None = None, CardClass=None) -> None:
         self._validate_arguments(cards=cards, filename=filename)
 
         if cards is not None:
             self._cards = cards
         if filename is not None:
-            self._cards = self._get_cards_from_csv(filename)
+            self._cards = self._get_cards_from_csv(filename, CardClass)
         if cards is None and filename is None:
             self._cards = []
 
@@ -41,7 +41,11 @@ class Deck:
             + "\n"
         )
 
-        for field in ["region", "collection", "animal", "activity"]:
+        all_card_fields = self._cards[0].__annotations__.keys()
+        skip = ["name", "site", "card_number"]
+        card_fields_not_excluded = [field for field in all_card_fields if field not in skip]
+
+        for field in card_fields_not_excluded:
             repr_string += (
                 f"{field.capitalize():<{col_len_after_field}}"
                 + "".join([f"{str(getattr(card, field)):<{col_len}}" for card in self._cards])
@@ -94,7 +98,7 @@ class Deck:
                 return i
         raise ValueError(f"Site {site} is not in the deck.")
 
-    def _get_cards_from_csv(self, filename: str) -> list[Card]:
+    def _get_cards_from_csv(self, filename: str, CardClass) -> list[Card]:
         created_cards = []
 
         df = pd.read_csv(filename)
@@ -103,7 +107,7 @@ class Deck:
         card_data: list[dict] = df.to_dict(orient="records")
 
         for element in card_data:
-            card = Card(**element)
+            card = CardClass(**element)
             created_cards.append(card)
 
         return created_cards

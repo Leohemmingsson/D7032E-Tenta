@@ -35,14 +35,25 @@ def get_server_settings_from_user() -> dict:
     return {"port": port, "client_count": client_count, "bot_count": bot_count}
 
 
-def get_client_port_from_user() -> int | None:
+def get_client_ip_and_port_from_user() -> tuple[str | None, int | None]:
     """
     Asks the user for the port number of the game they want to join.
 
     Returns:
         port: int | None
     """
-    return _get_game_port_number_from_user()
+    ip = _get_game_ip_from_user()
+    port = _get_game_port_number_from_user()
+    return (ip, port)
+
+
+def _get_game_ip_from_user() -> str | None:
+    print("Enter the ip of the server (Empty is localhost):")
+    print("ex) 192.168.68.100")
+    ip = input()
+    if ip == "":
+        ip = None
+    return ip
 
 
 def get_package_from_user(alternatives: list) -> PackageData:

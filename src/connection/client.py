@@ -8,9 +8,12 @@ from .utils import get_full_message, send_message_to
 
 
 class Client:
-    def __init__(self, PORT: int | None = None, HEADERSIZE: int | None = None) -> None:
+    def __init__(self, PORT: int | None = None, IP: str | None = None, HEADERSIZE: int | None = None) -> None:
         if PORT is None:
             PORT = 1234
+        if IP is None:
+            IP = socket.gethostname()
+        self.IP = IP
         self.PORT = PORT
         self.HEADERSIZE = HEADERSIZE
 
@@ -32,7 +35,7 @@ class Client:
 
     def _connect_to_server(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((socket.gethostname(), self.PORT))
+        s.connect((self.IP, self.PORT))
 
         while True:
             response = self._listen_to_server(s)

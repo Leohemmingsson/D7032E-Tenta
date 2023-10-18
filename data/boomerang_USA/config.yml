@@ -1,9 +1,5 @@
 about:
   name: Boomerang USA
   class_name: BoomerangUSA
+  card_class_name: USACard
   is_active: False
-
-naming:
-  animals: animals
-  collections: collections
-  activities: activities

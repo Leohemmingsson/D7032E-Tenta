@@ -23,6 +23,10 @@ class PackageData:
         return self._class_name
 
     @property
+    def card_class_name(self) -> str:
+        return self._card_class_name
+
+    @property
     def path(self) -> str:
         return self._path
 
@@ -31,4 +35,5 @@ class PackageData:
             config_values = yaml.safe_load(file)
         self._name = config_values["about"]["name"]
         self._class_name = config_values["about"]["class_name"]
+        self._card_class_name = config_values["about"]["card_class_name"]
         self._is_active = bool(config_values["about"]["is_active"])

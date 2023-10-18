@@ -38,6 +38,10 @@ class ContextLoader:
         return self._package.class_name
 
     @property
+    def card_class_name(self) -> str:
+        return self._package.card_class_name
+
+    @property
     def packet_path(self) -> str:
         return self._package.path
 
@@ -56,8 +60,7 @@ class ContextLoader:
 
         return all_players
 
-    @property
-    def deck(self) -> Deck:
-        deck = Deck(filename=self._deck_path)
+    def deck(self, CardClass) -> Deck:
+        deck = Deck(filename=self._deck_path, CardClass=CardClass)
         deck.shuffle()
         return deck
