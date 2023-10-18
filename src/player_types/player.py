@@ -14,18 +14,33 @@ class Player:
         self._chosen_acitivity = []
 
     def send_message(self, message: str) -> None:
+        """
+        Sending a message to the player's terminal
+        """
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def show_cards_in_hand(self) -> None:
+        """
+        Showing the cards the player has in hand, this is like send_message but with the cards
+        """
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def choose_card(self) -> None:
+        """
+        Choosing a card from the hand and placing it in chosen cards
+        """
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def clear_screen(self) -> None:
+        """
+        This is to clear the screen of the player, nothing functional only makes it look better
+        """
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     def ask(self, question: str) -> str:
+        """
+        This is a way to send custom questions to the player, and get a response
+        """
         raise NotImplementedError(f"Method not implemented for {type(self).__name__}")
 
     @property

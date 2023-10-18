@@ -7,6 +7,11 @@ from ..player_types import MultiplePlayers
 
 
 class Boomerang:
+    """
+    This is where the class which keeps track of the game.
+    Here states are tracked and start_game is the game loop.
+    """
+
     def __init__(self, players: MultiplePlayers, deck: Deck) -> None:
         self.players = players
         self.deck = deck

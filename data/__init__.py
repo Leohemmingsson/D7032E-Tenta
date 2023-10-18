@@ -1,4 +1,3 @@
-from .boomerang_australia import BoomerangAustralia
-from .boomerang_australia import AustraliaCard
+from .boomerang_australia import BoomerangAustralia, AustraliaCard
 
 __all__ = ["BoomerangAustralia", "AustraliaCard"]

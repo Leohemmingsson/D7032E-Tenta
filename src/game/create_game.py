@@ -1,4 +1,4 @@
-from ..initialize_game import ContextLoader
+from .context_loader import ContextLoader
 from ..game import Boomerang
 
 

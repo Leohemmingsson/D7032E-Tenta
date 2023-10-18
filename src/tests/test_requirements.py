@@ -1,5 +1,5 @@
 # import pytest
-from src.initialize_game import ContextLoader
+from src.game import ContextLoader
 
 from unittest.mock import patch
 
