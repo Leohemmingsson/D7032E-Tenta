@@ -31,12 +31,11 @@ def count_throw_and_catch_score(one_player) -> int:
 
 
 def region_bonus(players: MultiplePlayers, completed_regions: list, REGION_BONUS_SCORE: int) -> list:
-    has_completed_regions = players.get_players_with_completed_region_bonus(completed_regions)
-    for player in has_completed_regions:
-        completed_regions = player.get_completed_regions_not_taken(completed_regions)
-        for one_region in completed_regions:
-            if one_region not in completed_regions:
-                completed_regions.append(one_region)
+    old_completed_regions = players.get_players_with_completed_region_bonus(completed_regions)
+    for player in old_completed_regions:
+        new_completed_regions = player.get_completed_regions_not_taken(completed_regions)
+        for one_region in new_completed_regions:
+            completed_regions.append(one_region)
 
             player.add_score(REGION_BONUS_SCORE, "Region bonus")
 
@@ -53,7 +52,7 @@ def collection_bonus(one_player: Player):
             collection_score = bonuses["collection"][one_card.collection]
             score += collection_score
 
-    if score >= 7:
+    if score > 7:
         return score
     return score * 2
 
@@ -80,7 +79,7 @@ def animal_bonus(one_player: Player):
 
 
 def site_bonus(one_player: Player):
-    score = one_player.nr_or_visited_sites
+    score = len(one_player.get_visited_sites_since_last_get())
     return score
 
 

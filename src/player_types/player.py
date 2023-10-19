@@ -196,12 +196,15 @@ class Player:
         """
         Takes chosen card from hand and places in chosen cards.
         """
-        self._map.visit_site(site)
         card = self._hand.pick_from_site(site)
-        self._chosen_card.add_card(card)
+        self._add_card_to_chosen(card)
 
     def _choose_first_card(self) -> None:
         card = self._hand.draw_first_card()
+        self._add_card_to_chosen(card)
+
+    def _add_card_to_chosen(self, card: Card) -> None:
+        self._map.visit_site(card.site)
         self._chosen_card.add_card(card)
 
     @classmethod

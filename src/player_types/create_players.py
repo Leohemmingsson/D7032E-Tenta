@@ -6,6 +6,9 @@ from ..data_structures import ClientConnectionInfo, Map
 
 
 def create_players(connection_info: list[ClientConnectionInfo] | None, bot_count: int, deck_path: str) -> list[Player]:
+    """
+    Depending on the connection_info, and bot_count this will create a list of players of different types.
+    """
     all_players = [ServerPlayer.from_id(0, Map(deck_path))]
     if connection_info is not None:
         for client_info in connection_info:

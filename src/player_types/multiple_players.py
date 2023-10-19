@@ -24,6 +24,10 @@ class MultiplePlayers:
         return self._players
 
     def get_players_with_completed_region_bonus(self, taken: list[str]) -> list[Player]:
+        """
+        Returns a list of players that have completed regions that are not taken.
+        No side effects.
+        """
         players_with_completed_region_bonus = []
         for one_player in self._players:
             completed_regions = one_player.get_completed_regions_not_taken(taken)
@@ -67,12 +71,6 @@ class MultiplePlayers:
         Creates one thread per player so each player can choose a card.
         When everyone has chosen a card (simultaneously), the function is done
         """
-
-        # TODO:
-        # If there is some more time, make a error in the thread crash the game.
-        # Now if input from one player does not exist (card in deck), the game will continue without
-        # any card being chosen
-
         threads = []
         for player in self._players:
             one_thread = Thread(target=player.choose_card)
@@ -82,6 +80,10 @@ class MultiplePlayers:
             one_thread.join()
 
     def rotate_cards_in_hand(self, reversed: bool = False) -> None:
+        """
+        This rotates the cards between the players.
+        So one player get another players cards, and so on.
+        """
         all_decks = []
         for player in self._players:
             all_decks.append(player.get_all_cards_in_hand())
@@ -94,10 +96,17 @@ class MultiplePlayers:
             i += 1
 
     def clear_screen(self):
+        """
+        Cosmetic feature to clean screen.
+        """
         for player in self._players:
             player.clear_screen()
 
     def show_all_players_draft(self):
+        """
+        Show all players draft to all players.
+        (Every player sees the same thing)
+        """
         message = ""
         for player in self._players:
             if len(player.chosen_cards) == 0:
@@ -109,11 +118,18 @@ class MultiplePlayers:
         self.broadcast(message)
 
     def show_visited_sites(self):
+        """
+        Inidividually show players their visited sites.
+        """
         for one_player in self._players:
             visited_sites = one_player.visited_sites
             one_player.send_message(f"visited_sites: \n{visited_sites}")
 
     def count_and_divide_score_with_func(self, score_name: str, func: Callable) -> None:
+        """
+        This is a wrapper function to count and divide score for each player.
+        So when giving a scoring function, this will be done for each player.
+        """
         threads = []
         for one_player in self._players:
             one_thread = Thread(target=self._count_and_div_score_one_player, args=(one_player, score_name, func))
@@ -131,6 +147,10 @@ class MultiplePlayers:
             player.new_round()
 
     def show_results_and_winner(self):
+        """
+        Displays first each of the players personal score summary.
+        Then displays the winner.
+        """
         winner = {}
         for player in self._players:
             score_summary = player.get_total_score_summary

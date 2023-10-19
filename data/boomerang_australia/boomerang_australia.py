@@ -17,8 +17,9 @@ class BoomerangAustralia(Boomerang):
         self.players.count_and_divide_score_with_func("Collection bonus", collection_bonus)
         self.players.count_and_divide_score_with_func("Animal bonus", animal_bonus)
         self.players.count_and_divide_score_with_func("Activity bonus", activity_bonus)
+        self.players.count_and_divide_score_with_func("New site visited", site_bonus)
 
         self.players.broadcast("")
 
-    def _count_score_after_game(self) -> None:
-        self.players.count_and_divide_score_with_func("New site visited", site_bonus)
+    # def _count_score_after_game(self) -> None:
+    # self.players.count_and_divide_score_with_func("New site visited", site_bonus)

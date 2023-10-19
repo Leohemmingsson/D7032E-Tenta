@@ -2,6 +2,10 @@ import yaml
 
 
 class PackageData:
+    """
+    This is the structure to get all data from a packages config file.
+    """
+
     def __init__(self, path) -> None:
         self._deck_filename = path + "/cards.csv"
         self._load_data_from_config(path + "/config.yml")

@@ -5,6 +5,11 @@ from .utils import get_full_message, send_message_to
 
 
 class Server:
+    """
+    This is the server class, which is used to create a server and listen for clients.
+    This will initialize a server and get all connections.
+    """
+
     def __init__(self, PORT: int | None = None, HEADERSIZE: int | None = None) -> None:
         if PORT is None:
             PORT = 1234

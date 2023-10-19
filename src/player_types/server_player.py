@@ -15,7 +15,7 @@ class ServerPlayer(Player):
 
     def choose_card(self) -> None:
         if len(self._hand) == 1:
-            self._chosen_card.add_card(self._hand.draw_first_card())
+            self._choose_first_card()
         else:
             print("Choose card:")
             site = input()

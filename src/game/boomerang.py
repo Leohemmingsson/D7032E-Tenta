@@ -55,7 +55,7 @@ class Boomerang:
 
     def _set_constants(self) -> None:
         # Required, and should be declared when overwriting this funtion
-        # Only reason for declaring here is for type hints
+        # Only reason for declaring here is to get better type hints
         self._NR_OF_ROUNDS = 4
         self._CARDS_IN_HAND = 7
 
