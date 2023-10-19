@@ -204,7 +204,8 @@ class Player:
         self._add_card_to_chosen(card)
 
     def _add_card_to_chosen(self, card: Card) -> None:
-        self._map.visit_site(card.site)
+        if self._map is not None:
+            self._map.visit_site(card.site)
         self._chosen_card.add_card(card)
 
     @classmethod
