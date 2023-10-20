@@ -146,7 +146,7 @@ class MultiplePlayers:
         for player in self._players:
             player.new_round()
 
-    def show_results_and_winner(self):
+    def show_results_and_winner(self) -> int:
         """
         Displays first each of the players personal score summary.
         Then displays the winner.
@@ -171,6 +171,7 @@ class MultiplePlayers:
             player.send_message(score_summary["repr"])
 
         self.broadcast(f"Winner is player {winner['id']} with {winner['score']} points!")
+        return winner["id"]
 
     def give_points(self, points: int, reason: str) -> None:
         for one_player in self._players:

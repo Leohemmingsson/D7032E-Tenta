@@ -21,11 +21,17 @@ class Scoring:
 
     @property
     def summary(self):
+        """
+        This returns both the score and the pretty print for the whole game.
+        """
         val = {"repr": repr(self), "score": self.score}
         return val
 
     @property
     def score(self) -> int:
+        """
+        Returns the total score. (all creterias, all rounds)
+        """
         score = 0
         for one_score in self._score_per_type.values():
             score += sum(one_score)
@@ -33,6 +39,9 @@ class Scoring:
 
     @property
     def this_round_summary(self) -> str:
+        """
+        Pretty print values returned as a string
+        """
         rep = "#####\n"
         rep += "# This rounds score:\n"
         for key, value in self._score_per_type.items():
@@ -44,18 +53,27 @@ class Scoring:
 
     @property
     def this_round_summary_values(self) -> dict:
+        """
+        Only values from this round returned
+        """
         val = {}
         for key, value in self._score_per_type.items():
             val[key] = value[-1]
         return val
 
     def add_score(self, value: int, reason: str) -> None:
+        """
+        Adding score to this round, with a reason.
+        """
         if reason not in self._score_per_type:
             self._score_per_type[reason] = [0 for _ in range(self._round)]
 
         self._score_per_type[reason][-1] += value
 
     def new_round(self) -> None:
+        """
+        This is just a counter for the rounds.
+        """
         self._round += 1
         for key in self._score_per_type:
             self._score_per_type[key].append(0)

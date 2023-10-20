@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 # import pytest
 from src.game import ContextLoader, create_game_from_context
+from src.data_structures import Scoring
 from data.boomerang_australia import AustraliaCard
 
 
@@ -82,3 +83,100 @@ class TestRequirements:
         context = ContextLoader()
         game = create_game_from_context(context)
         assert game._NR_OF_ROUNDS == 4
+
+    def test_scoring_system(self):
+        x = Scoring()
+        x.new_round()
+        for _ in range(4):
+            x.add_score(1, "New site")
+        x.new_round()
+        for _ in range(4):
+            x.add_score(1, "New site")
+
+        assert x.score == 8
+
+    def test_scoring_mulitple_types(self):
+        x = Scoring()
+        x.new_round()
+        for _ in range(4):
+            x.add_score(1, "New site")
+        x.new_round()
+        for _ in range(4):
+            x.add_score(3, "Region bonus")
+
+        assert x.score == 16
+
+    def test_scoring_one_time_multiple_rounds(self):
+        x = Scoring()
+        for _ in range(4):
+            x.new_round()
+        x.add_score(1, "New site")
+
+        assert x.score == 1
+
+    def test_winner_highest_score(self):
+        from src.player_types import Bot, MultiplePlayers
+
+        player = Bot.from_id(1, None)
+        player.new_round()
+        player.add_score(1, "Throw and catch")
+        player.add_score(6, "Region bonus")
+        player.add_score(3, "Region bonus")
+        player2 = Bot.from_id(2, None)
+        player2.new_round()
+        player2.add_score(7, "Throw and catch")
+        player2.add_score(1, "New site")
+        all_players = MultiplePlayers([player, player2])
+        winner_id = all_players.show_results_and_winner()
+        assert winner_id == player.id
+
+    def test_winner_highest_score2(self):
+        from src.player_types import Bot, MultiplePlayers
+
+        player = Bot.from_id(1, None)
+        player.new_round()
+        player.add_score(7, "Throw and catch")
+        player.add_score(3, "Region bonus")
+        player.add_score(3, "Region bonus")
+        player2 = Bot.from_id(2, None)
+        player2.new_round()
+        player2.add_score(1, "Throw and catch")
+        player2.add_score(1, "New site")
+        player2.add_score(15, "Animal bonus")
+        all_players = MultiplePlayers([player, player2])
+        winner_id = all_players.show_results_and_winner()
+        assert winner_id == player2.id
+
+    def test_tie(self):
+        from src.player_types import Bot, MultiplePlayers
+
+        player = Bot.from_id(1, None)
+        player.new_round()
+        player.add_score(1, "Throw and catch")
+        player.add_score(1, "New site")
+        player.add_score(1, "New site")
+        player.add_score(1, "New site")
+        player.add_score(1, "New site")
+        player2 = Bot.from_id(2, None)
+        player2.new_round()
+        player2.add_score(4, "Throw and catch")
+        player2.add_score(1, "New site")
+        all_players = MultiplePlayers([player, player2])
+        winner_id = all_players.show_results_and_winner()
+        assert winner_id == player2.id
+
+    def test_tie_other_order(self):
+        from src.player_types import Bot, MultiplePlayers
+
+        player = Bot.from_id(1, None)
+        player.new_round()
+        player.add_score(3, "Throw and catch")
+        player.add_score(1, "New site")
+        player2 = Bot.from_id(2, None)
+        player2.new_round()
+        player2.add_score(2, "Throw and catch")
+        player.add_score(1, "New site")
+        player2.add_score(1, "New site")
+        all_players = MultiplePlayers([player, player2])
+        winner_id = all_players.show_results_and_winner()
+        assert winner_id == player.id
